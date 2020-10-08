@@ -1,0 +1,22 @@
+<h1>Crear una Publicación</h1>
+
+<% if @post.errors.any? %>
+ <div>
+ 	Se encontraron errores:
+ 	<ul>
+ 		<% @post.errors.full_messages.each do |error_message| %>
+ 		<li><%= error_message %></li>
+ 		<% end %>
+ 	</ul>
+ </div>
+<% end %>
+
+<%= form_with model: @post, :url => { :action => :create }, local: true do |f| %>
+ <p><%= f.label :title, 'Titulo: ' %><%= f.text_field :title %></p>
+ <p><%= f.label :author, 'Autor: ' %><%= f.text_field :author %></p>
+ <p><%= f.label :tipo, 'Tipo: ' %><%= f.select(:tipo, ['Servicio', 'Carrete'])%></p>
+ <p><%= f.label :comment, 'Descripción: ' %><%= f.text_field :comment %></p>
+ <%= f.submit "Crear Publicacion" %>
+<% end %>
+
+<%= link_to 'Back', :action => :index %>

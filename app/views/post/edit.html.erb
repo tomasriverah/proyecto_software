@@ -1,0 +1,36 @@
+<h1>Editando tu Publicación</h1>
+
+<%= form_for :post, :url => { :action => :update, :id => @post.id },
+:method => :put do |f| %>
+  <% if @post.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@post.errors.count, "error") %> prohibited
+      this post from being saved:</h2>
+    <ul>
+    <% @post.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.label :tipo %><br>
+    <%= f.select(:tipo, ['Servicio', 'Carrete'])%>
+  </p>
+
+  <p>
+    <%= f.label :comment %><br>
+    <%= f.text_area :comment %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', :action => :index %>

@@ -1,0 +1,6 @@
+<h1>Nombre Usuario: <%= current_user.name %> </h1>
+<p>Esta pagina desplega el nombre de usuario y permite customizar algunos atributos</p>
+<p>Comuna: <%= Comuna.find(current_user.comunas_id).nombre%><p>
+<p>¿ Deseas ser proveedor de Servicio ? <%= button_to "Service Enable", 'blabla' ,method: :get %><br><p>
+<p>¿ Deseas ser Admin ? <%= button_to "Admin Enable", user_path(current_user) ,method: :get %><br><p>
+<%= link_to "Editar información de usuario", edit_user_registration_path %>

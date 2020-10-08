@@ -1,0 +1,28 @@
+<h1>Publicaciones</h1>
+<%= link_to 'Nueva Publicación', :action => :new%>
+<br></br>
+<div class="posts-list">
+	<% @post.each do |post| %>
+	<div class= "posts-list___item">
+		Titulo: <%= post.title %>
+		Autor: <%= post.author%>
+		Comuna(s): *Comuna del autor*
+		Tipo: <%= post.tipo %>
+		Descripción: <%= post.comment %>
+		<p>
+		 <%= link_to 'Abrir', 
+		 :action => :show, 
+		 :id => post.id %>
+	     <%= link_to 'Editar',
+             :action => :edit, 
+             :id => post.id
+             %>
+         <%= link_to 'Borrar Publicación',
+         { :action => :destroy, :id => post.id }, 
+         :method => :delete, 
+         :data => { :confirm => 'Are you sure?' }
+             %>
+        </p>
+	</div>
+	<% end %>
+</div>

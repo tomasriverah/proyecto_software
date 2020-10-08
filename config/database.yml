@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  username: postgres
+  password: 'grupo10software'
+  pool: 5
+
+production:
+  <<: *default
+  database: DCCarrete_production
+
+development:
+  <<: *default
+  database: DCCarrete_development
+
+test:
+  <<: *default
+  database: DCCarrete_test

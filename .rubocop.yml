@@ -1,0 +1,12 @@
+Metrics/LineLength:
+  Max: 100
+
+Layout/IndentationWidth:
+  Description: 'Use 2 spaces for indentation.'
+  StyleGuide: '#spaces-indentation'
+  Enabled: true
+  Width: 2
+  IgnoredPatterns: []
+
+Layout/MultilineHashBraceLayout:
+  Enabled: true

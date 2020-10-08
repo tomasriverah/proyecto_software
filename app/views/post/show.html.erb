@@ -1,0 +1,61 @@
+
+<p>
+  <strong>Titulo: </strong>
+  <%= @post.title %>
+</p>
+
+<p>
+  <strong>Autor: </strong>
+  <%= @post.author %>
+</p>
+
+<p>
+  <strong>Comuna(s): *Comuna del autor*</strong>
+</p>
+
+<p>
+  <strong>Tipo: </strong>
+  <%= @post.tipo %>
+</p>
+
+<p>
+  <strong>Descripción: </strong>
+  <%= @post.comment %>
+</p>
+
+<h2>Comentarios</h2>
+<% @post.comentarios.each do |comment| %>
+  <p>
+    Autor:
+    <%= comment.author %>
+  </p>
+
+  <p>
+    Comentario:
+    <%= comment.body %>
+  </p>
+
+  <p>
+  <%= link_to 'Eliminar Comentario', [comment.post, comment],
+               :method => :delete,
+               :data => { :confirm => '¿Estás seguro?' } %>
+  </p>
+<% end %>
+
+<h2>Escribe un comentario:</h2>
+<%= form_for([@post, @post.comentarios.build]) do |f| %>
+  <p>
+    <%= f.label :Nombre %><br />
+    <%= f.text_field :author %>
+  </p>
+  <p>
+    <%= f.label :Contenido %><br />
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', :action => :index %>
+| <%= link_to 'Edit', :action => :edit, :id => @post.id %>
