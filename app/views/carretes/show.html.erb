@@ -1,0 +1,87 @@
+<p>
+  <strong>Titulo: </strong>
+  <%= @carrete.title %>
+</p>
+
+<p>
+  <strong>Autor: </strong>
+  <%= @carrete.user.name %>
+</p>
+
+<p>
+  <strong>Comuna(s): </strong>
+  <%= Comuna.find(@carrete.user.comunas_id).nombre%>
+</p>
+
+<p>
+  <strong>Descripción: </strong>
+  <%= @carrete.body %>
+</p>
+
+<p>
+  <strong>Precio máximo de ingreso: <%= @carrete.max_price %></strong>
+</p>
+
+<p>
+  <strong>Precio minimo de ingreso: <%= @carrete.min_price %></strong>
+</p>
+
+<% if @carrete.user_id == current_user.id %>
+<h2>Monto acumulado fiesta</h2>
+    <%= @monto %>
+<% end %>
+
+
+<h2>Postular:</h2>
+ 
+<%= form_for(@postulacion, {:controller => "postulacions", :action => "postular", :method => "post"}) do |f| %>
+  <p>
+    <%= f.hidden_field :id, :value => @postulacion.id %>
+    <%= f.hidden_field :carrete_id, :value => @carrete.id %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+    <%= f.label :monto %><br />
+    <%= text_field_tag :monto %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+
+
+
+<h2>Comentarios</h2>
+<% @carrete.comentarios.each do |comment| %>
+  <p>
+    Autor:
+    <%= comment.user.name %>
+  </p>
+
+  <p>
+    Comentario:
+    <%= comment.body %>
+  </p>
+
+  <p>
+  <%= link_to 'Eliminar Comentario', [comment.carrete, comment],
+               :method => :delete,
+               :data => { :confirm => '¿Estás seguro?' } %>
+  </p>
+<% end %>
+
+<h2>Escribe un comentario:</h2>
+<%= form_for([@carrete, @carrete.comentarios.build]) do |f| %>
+  <p>
+    <%= f.label :Contenido %><br />
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit 'Crear comentario'%>
+  </p>
+<% end %>
+
+<%= link_to 'Back', :action => :index %>
+
+<% if @carrete.user == current_user %>
+| <%= link_to 'Edit', :action => :edit, :id => @carrete.id %>
+<% end %>

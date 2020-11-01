@@ -1,0 +1,236 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/mnt/c/Users/gever/Desktop/Universidad/Ramos/2020-2/Ing de Software/proyecto_local/grupo10-proyecto/app/models/user.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      },
+      "/mnt/c/Users/gever/Desktop/Universidad/Ramos/2020-2/Ing de Software/proyecto_local/grupo10-proyecto/app/models/application_record.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/Users/gever/Desktop/Universidad/Ramos/2020-2/Ing de Software/proyecto_local/grupo10-proyecto/app/helpers/application_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/Users/gever/Desktop/Universidad/Ramos/2020-2/Ing de Software/proyecto_local/grupo10-proyecto/app/helpers/comentarios_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/Users/gever/Desktop/Universidad/Ramos/2020-2/Ing de Software/proyecto_local/grupo10-proyecto/app/helpers/home_page_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/Users/gever/Desktop/Universidad/Ramos/2020-2/Ing de Software/proyecto_local/grupo10-proyecto/app/helpers/meme_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/Users/gever/Desktop/Universidad/Ramos/2020-2/Ing de Software/proyecto_local/grupo10-proyecto/app/helpers/post_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/Users/gever/Desktop/Universidad/Ramos/2020-2/Ing de Software/proyecto_local/grupo10-proyecto/app/helpers/profile_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/Users/gever/Desktop/Universidad/Ramos/2020-2/Ing de Software/proyecto_local/grupo10-proyecto/app/helpers/user_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/Users/gever/Desktop/Universidad/Ramos/2020-2/Ing de Software/proyecto_local/grupo10-proyecto/app/helpers/users_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/Users/gever/Desktop/Universidad/Ramos/2020-2/Ing de Software/proyecto_local/grupo10-proyecto/app/models/comentario.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/mnt/c/Users/gever/Desktop/Universidad/Ramos/2020-2/Ing de Software/proyecto_local/grupo10-proyecto/app/models/comuna.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/Users/gever/Desktop/Universidad/Ramos/2020-2/Ing de Software/proyecto_local/grupo10-proyecto/app/models/post.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/mnt/c/Users/gever/Desktop/Universidad/Ramos/2020-2/Ing de Software/proyecto_local/grupo10-proyecto/app/models/role.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/Users/gever/Desktop/Universidad/Ramos/2020-2/Ing de Software/proyecto_local/grupo10-proyecto/app/controllers/home_page_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/mnt/c/Users/gever/Desktop/Universidad/Ramos/2020-2/Ing de Software/proyecto_local/grupo10-proyecto/app/controllers/application_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          0,
+          null,
+          null,
+          1,
+          null,
+          1,
+          0,
+          null,
+          0,
+          null,
+          null
+        ]
+      },
+      "/mnt/c/Users/gever/Desktop/Universidad/Ramos/2020-2/Ing de Software/proyecto_local/grupo10-proyecto/app/controllers/post_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          0,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          4,
+          null,
+          4,
+          4,
+          null,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          null,
+          1,
+          4,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1602289875
+  }
+}

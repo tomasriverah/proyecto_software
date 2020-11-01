@@ -1,0 +1,11 @@
+<h1>Nueva comuna</h1>
+
+
+
+<%= form_with model: @comuna, :url => { :action => :create } do |f| %>
+ <p><%= f.label :nombre, 'Nombre: ' %>
+ <%= f.text_field :nombre %></p>
+  <%= f.submit "Agregar" %>
+ <% end %>
+
+

@@ -1,0 +1,31 @@
+<h1><%=@comuna.nombre%></h1>
+
+<%= form_with(model: @comuna, local: true) do |form| %>
+
+  <% if @comuna.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@comuna.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @comuna.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= form.label :nombre %><br>
+    <%= form.text_field :nombre %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+
+<% end %>
+
+
+<%= link_to 'Volver', comunas_path %>

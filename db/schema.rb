@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_06_223302) do
+ActiveRecord::Schema.define(version: 2020_10_23_231945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "carretes", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.bigint "user_id"
+    t.integer "max_price"
+    t.integer "min_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_carretes_on_user_id"
+  end
 
   create_table "comentarios", force: :cascade do |t|
     t.string "author"
@@ -21,7 +32,11 @@ ActiveRecord::Schema.define(version: 2020_10_06_223302) do
     t.bigint "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "carrete_id"
+    t.bigint "user_id"
+    t.index ["carrete_id"], name: "index_comentarios_on_carrete_id"
     t.index ["post_id"], name: "index_comentarios_on_post_id"
+    t.index ["user_id"], name: "index_comentarios_on_user_id"
   end
 
   create_table "comunas", force: :cascade do |t|
@@ -39,11 +54,38 @@ ActiveRecord::Schema.define(version: 2020_10_06_223302) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "postulacions", force: :cascade do |t|
+    t.integer "carrete_id"
+    t.text "postulaciones"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "servicecomments", force: :cascade do |t|
+    t.bigint "user_id"
+    t.text "body"
+    t.bigint "servicio_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["servicio_id"], name: "index_servicecomments_on_servicio_id"
+    t.index ["user_id"], name: "index_servicecomments_on_user_id"
+  end
+
+  create_table "servicios", force: :cascade do |t|
+    t.string "title"
+    t.bigint "user_id"
+    t.text "body"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_servicios_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -63,7 +105,13 @@ ActiveRecord::Schema.define(version: 2020_10_06_223302) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  add_foreign_key "carretes", "users"
+  add_foreign_key "comentarios", "carretes"
   add_foreign_key "comentarios", "posts"
+  add_foreign_key "comentarios", "users"
+  add_foreign_key "servicecomments", "servicios"
+  add_foreign_key "servicecomments", "users"
+  add_foreign_key "servicios", "users"
   add_foreign_key "users", "comunas", column: "comunas_id"
   add_foreign_key "users", "roles"
 end

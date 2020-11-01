@@ -1,0 +1,22 @@
+<h1>Crea tu Carrete</h1>
+
+<% if @carrete.errors.any? %>
+ <div>
+ 	Se encontraron errores:
+ 	<ul>
+ 		<% @carrete.errors.full_messages.each do |error_message| %>
+ 		<li><%= error_message %></li>
+ 		<% end %>
+ 	</ul>
+ </div>
+<% end %>
+
+<%= form_with model: @carrete, :url => { :action => :create }, local: true do |f| %>
+ <p><%= f.label :title, 'Titulo: ' %><%= f.text_field :title %></p>
+ <p><%= f.label :body, 'Descripción: ' %><%= f.text_field :body %></p>
+ <p><%= f.label :max_price, 'Precio de ingreso máximo: ' %><%= f.text_field :max_price %></p>
+ <p><%= f.label :min_price, 'Precio de ingreso minimo: ' %><%= f.text_field :min_price %></p>
+ <%= f.submit "Crear Carrete" %>
+<% end %>
+
+<%= link_to 'Back', :action => :index %>

@@ -1,0 +1,21 @@
+<h1>Crea tu oferta de Servicio</h1>
+
+<% if @servicio.errors.any? %>
+ <div>
+ 	Se encontraron errores:
+ 	<ul>
+ 		<% @servicio.errors.full_messages.each do |error_message| %>
+ 		<li><%= error_message %></li>
+ 		<% end %>
+ 	</ul>
+ </div>
+<% end %>
+
+<%= form_with model: @servicio, :url => { :action => :create }, local: true do |f| %>
+ <p><%= f.label :title, 'Titulo: ' %><%= f.text_field :title %></p>
+ <p><%= f.label :body, 'Descripción: ' %><%= f.text_field :body %></p>
+ <p><%= f.label :price, 'Precio: ' %><%= f.text_field :price %></p>
+ <%= f.submit "Ofrecer Servicio" %>
+<% end %>
+
+<%= link_to 'Back', :action => :index %>

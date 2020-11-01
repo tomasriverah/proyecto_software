@@ -1,0 +1,10 @@
+<h1><%=@comuna.nombre%></h1>
+
+
+<%= link_to 'Editar', edit_comuna_url(@comuna)%>
+<br>
+<%= link_to 'Eliminar',
+         { :action => :destroy, :id => @comuna.id }, 
+         :method => :delete, 
+         :data => { :confirm => 'Are you sure?' }
+             %>

@@ -1,0 +1,17 @@
+<h1>Comunas</h1>
+
+<%=link_to "Agregar comuna", comunas_new_path%>
+<br>
+<div class="comuna list">
+<% @comuna.each do |comuna| %>
+   <%= comuna.nombre%> <br>
+   <%# <%= link_to 'Editar', edit_comuna_url(comuna)%>  
+   <%= link_to 'Eliminar',
+         { :action => :destroy, :id => comuna.id }, 
+         :method => :delete, 
+         :data => { :confirm => 'Are you sure?' }
+             %>
+   <br>
+</div>
+<% end %>
+

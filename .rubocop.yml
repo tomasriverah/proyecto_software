@@ -1,5 +1,5 @@
 Metrics/LineLength:
-  Max: 100
+  Max: 160
 
 Layout/IndentationWidth:
   Description: 'Use 2 spaces for indentation.'
@@ -10,3 +10,11 @@ Layout/IndentationWidth:
 
 Layout/MultilineHashBraceLayout:
   Enabled: true
+
+Documentation:
+  Enabled: false
+
+
+
+Metrics/BlockLength:
+  Max: 50

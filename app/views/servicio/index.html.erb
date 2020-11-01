@@ -1,0 +1,31 @@
+<h1>Servicios disponibles</h1>
+<%= link_to 'Ofrecer Servicio', :action => :new%>
+<br></br>
+<div class="servicio-list">
+	<% @servicio.each do |servicio| %>
+	<div class= "servicio-list___item">
+		Titulo: <%= servicio.title %>
+		Autor: <%= servicio.user.name%>
+		Comuna(s): <%= Comuna.find(servicio.user.comunas_id).nombre%>
+		Descripción: <%= servicio.body %>
+		Precio: <%= servicio.price %>
+		<p>
+		 <%= link_to 'Abrir', 
+		 :action => :show, 
+		 :id => servicio.id %>
+
+		 <% if servicio.user == current_user %>
+	     <%= link_to 'Editar',
+             :action => :edit, 
+             :id => servicio.id
+             %>
+         <%= link_to 'Borrar Servicio',
+         { :action => :destroy, :id => servicio.id }, 
+         :method => :delete, 
+         :data => { :confirm => 'Are you sure?' }
+             %>
+         <% end %>
+        </p>
+	</div>
+	<% end %>
+</div>

@@ -1,0 +1,32 @@
+<h1>Carretes disponibles</h1>
+<%= link_to 'Crear Carrete', :action => :new%>
+<br></br>
+<div class="carrete-list">
+	<% @carrete.each do |carrete| %>
+	<div class= "carretes-list___item">
+		Titulo: <%= carrete.title %>
+		Autor: <%= carrete.user.name%>
+		Comuna(s): <%= Comuna.find(carrete.user.comunas_id).nombre%>
+		Descripción: <%= carrete.body %>
+		Precio máximo: <%= carrete.max_price %>
+		Precio minimo: <%= carrete.min_price %>
+		<p>
+		 <%= link_to 'Abrir', 
+		 :action => :show, 
+		 :id => carrete.id %>
+
+		 <% if carrete.user == current_user %>
+	     <%= link_to 'Editar',
+             :action => :edit, 
+             :id => carrete.id
+             %>
+         <%= link_to 'Borrar Publicación',
+         { :action => :destroy, :id => carrete.id }, 
+         :method => :delete, 
+         :data => { :confirm => 'Are you sure?' }
+             %>
+         <% end %>
+        </p>
+	</div>
+	<% end %>
+</div>

@@ -1,0 +1,42 @@
+<h1>Editando tu Carrete</h1>
+
+<%= form_for :carrete, :url => { :action => :update, :id => @carrete.id },
+:method => :put do |f| %>
+  <% if @carrete.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@carrete.errors.count, "error") %> prohibited
+      this carrete from being saved:</h2>
+    <ul>
+    <% @carrete.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </p>
+
+  <p>
+    <%= f.label :max_price %><br>
+    <%= f.text_area :max_price %>
+  </p>
+
+  <p>
+    <%= f.label :min_price %><br>
+    <%= f.text_area :min_price %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', :action => :index %>

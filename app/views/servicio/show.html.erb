@@ -1,0 +1,56 @@
+<p>
+  <strong>Titulo: </strong>
+  <%= @servicio.title %>
+</p>
+
+<p>
+  <strong>Autor: </strong>
+  <%= @servicio.user.name %>
+</p>
+
+<p>
+  <strong>Comuna(s): </strong>
+  <%= Comuna.find(@servicio.user.comunas_id).nombre%>
+</p>
+
+<p>
+  <strong>Descripción: </strong>
+  <%= @servicio.body %>
+</p>
+
+<p>
+  <strong>Precio: <%= @servicio.price %></strong>
+</p>
+
+<h2>Comentarios</h2>
+<% @servicio.servicecomments.each do |comment| %>
+  <p>
+    Autor:
+    <%= comment.user.name %>
+  </p>
+
+  <p>
+    Comentario:
+    <%= comment.body %>
+  </p>
+
+  <p>
+  <%= link_to 'Eliminar Comentario', [comment.servicio, comment],
+               :method => :delete,
+               :data => { :confirm => '¿Estás seguro?' } %>
+  </p>
+<% end %>
+
+<h2>Escribe un comentario:</h2>
+<%= form_for([@servicio, @servicio.servicecomments.build]) do |f| %>
+  <p>
+    <%= f.label :Contenido %><br />
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit 'Crear comentario'%>
+  </p>
+<% end %>
+
+<%= link_to 'Back', :action => :index %>
+| <%= link_to 'Edit', :action => :edit, :id => @servicio.id %>
