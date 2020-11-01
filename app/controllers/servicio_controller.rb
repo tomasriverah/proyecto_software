@@ -1,5 +1,5 @@
 class ServicioController < ApplicationController
-  before_action :authenticate_user!, only: [:index], :show
+  before_action :authenticate_user!, only: [:index, :show]
   def index
   	@servicio = Servicio.all
   end
