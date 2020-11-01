@@ -752,3 +752,461 @@ Processing by HomePageController#home as HTML
 Completed 200 OK in 1365ms (Views: 1298.9ms | ActiveRecord: 18.0ms)
 
 
+  [1m[35m (12.8ms)[0m  [1m[35mCREATE DATABASE "DCCarrete_development" ENCODING = 'unicode'[0m
+  ↳ /home/tomas/.rvm/rubies/ruby-2.7.1/lib/ruby/gems/2.7.0/gems/rake-13.0.1/lib/rake/task.rb:281
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE DATABASE "DCCarrete_test" ENCODING = 'unicode'[0m
+  ↳ /home/tomas/.rvm/rubies/ruby-2.7.1/lib/ruby/gems/2.7.0/gems/rake-13.0.1/lib/rake/task.rb:281
+  [1m[35m (3.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/tomas/.rvm/rubies/ruby-2.7.1/lib/ruby/gems/2.7.0/gems/rake-13.0.1/lib/rake/task.rb:281
+  [1m[35m (4.5ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ /home/tomas/.rvm/rubies/ruby-2.7.1/lib/ruby/gems/2.7.0/gems/rake-13.0.1/lib/rake/task.rb:281
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/tomas/.rvm/rubies/ruby-2.7.1/lib/ruby/gems/2.7.0/gems/rake-13.0.1/lib/rake/task.rb:281
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ /home/tomas/.rvm/rubies/ruby-2.7.1/lib/ruby/gems/2.7.0/gems/rake-13.0.1/lib/rake/task.rb:281
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/tomas/.rvm/rubies/ruby-2.7.1/lib/ruby/gems/2.7.0/gems/rake-13.0.1/lib/rake/task.rb:281
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ /home/tomas/.rvm/rubies/ruby-2.7.1/lib/ruby/gems/2.7.0/gems/rake-13.0.1/lib/rake/task.rb:281
+  [1m[35mSQL (11.6ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  ↳ db/schema.rb:16
+  [1m[35m (67.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "carretes" CASCADE[0m
+  ↳ db/schema.rb:18
+  [1m[35m (64.1ms)[0m  [1m[35mCREATE TABLE "carretes" ("id" bigserial primary key, "title" character varying, "body" text, "user_id" bigint, "max_price" integer, "min_price" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:18
+  [1m[35m (10.2ms)[0m  [1m[35mCREATE  INDEX  "index_carretes_on_user_id" ON "carretes"  ("user_id")[0m
+  ↳ db/schema.rb:18
+  [1m[35m (16.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "comentarios" CASCADE[0m
+  ↳ db/schema.rb:29
+  [1m[35m (20.3ms)[0m  [1m[35mCREATE TABLE "comentarios" ("id" bigserial primary key, "author" character varying, "body" text, "post_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "carrete_id" bigint, "user_id" bigint)[0m
+  ↳ db/schema.rb:29
+  [1m[35m (7.3ms)[0m  [1m[35mCREATE  INDEX  "index_comentarios_on_carrete_id" ON "comentarios"  ("carrete_id")[0m
+  ↳ db/schema.rb:29
+  [1m[35m (7.8ms)[0m  [1m[35mCREATE  INDEX  "index_comentarios_on_post_id" ON "comentarios"  ("post_id")[0m
+  ↳ db/schema.rb:29
+  [1m[35m (7.2ms)[0m  [1m[35mCREATE  INDEX  "index_comentarios_on_user_id" ON "comentarios"  ("user_id")[0m
+  ↳ db/schema.rb:29
+  [1m[35m (9.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "comunas" CASCADE[0m
+  ↳ db/schema.rb:42
+  [1m[35m (21.3ms)[0m  [1m[35mCREATE TABLE "comunas" ("id" bigserial primary key, "nombre" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:42
+  [1m[35m (9.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "posts" CASCADE[0m
+  ↳ db/schema.rb:48
+  [1m[35m (21.9ms)[0m  [1m[35mCREATE TABLE "posts" ("id" bigserial primary key, "author" character varying, "title" character varying, "tipo" character varying, "comment" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:48
+  [1m[35m (11.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "postulacions" CASCADE[0m
+  ↳ db/schema.rb:57
+  [1m[35m (18.9ms)[0m  [1m[35mCREATE TABLE "postulacions" ("id" bigserial primary key, "carrete_id" integer, "postulaciones" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:57
+  [1m[35m (12.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "roles" CASCADE[0m
+  ↳ db/schema.rb:64
+  [1m[35m (21.8ms)[0m  [1m[35mCREATE TABLE "roles" ("id" bigserial primary key, "name" character varying, "code" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:64
+  [1m[35m (20.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "servicecomments" CASCADE[0m
+  ↳ db/schema.rb:71
+  [1m[35m (24.6ms)[0m  [1m[35mCREATE TABLE "servicecomments" ("id" bigserial primary key, "user_id" bigint, "body" text, "servicio_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:71
+  [1m[35m (10.2ms)[0m  [1m[35mCREATE  INDEX  "index_servicecomments_on_servicio_id" ON "servicecomments"  ("servicio_id")[0m
+  ↳ db/schema.rb:71
+  [1m[35m (9.7ms)[0m  [1m[35mCREATE  INDEX  "index_servicecomments_on_user_id" ON "servicecomments"  ("user_id")[0m
+  ↳ db/schema.rb:71
+  [1m[35m (17.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "servicios" CASCADE[0m
+  ↳ db/schema.rb:81
+  [1m[35m (34.0ms)[0m  [1m[35mCREATE TABLE "servicios" ("id" bigserial primary key, "title" character varying, "user_id" bigint, "body" text, "price" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:81
+  [1m[35m (11.2ms)[0m  [1m[35mCREATE  INDEX  "index_servicios_on_user_id" ON "servicios"  ("user_id")[0m
+  ↳ db/schema.rb:81
+  [1m[35m (28.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  ↳ db/schema.rb:91
+  [1m[35m (31.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "name" character varying, "role_id" bigint, "comunas_id" bigint)[0m
+  ↳ db/schema.rb:91
+  [1m[35m (9.7ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_comunas_id" ON "users"  ("comunas_id")[0m
+  ↳ db/schema.rb:91
+  [1m[35m (9.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  ↳ db/schema.rb:91
+  [1m[35m (8.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  ↳ db/schema.rb:91
+  [1m[35m (8.6ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_role_id" ON "users"  ("role_id")[0m
+  ↳ db/schema.rb:91
+  [1m[35m (30.3ms)[0m  [1m[35mALTER TABLE "carretes" ADD CONSTRAINT "fk_rails_adaf53ffaf"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  ↳ db/schema.rb:108
+  [1m[35m (12.2ms)[0m  [1m[35mALTER TABLE "comentarios" ADD CONSTRAINT "fk_rails_9fd8b4983a"
+FOREIGN KEY ("carrete_id")
+  REFERENCES "carretes" ("id")
+[0m
+  ↳ db/schema.rb:109
+  [1m[35m (6.0ms)[0m  [1m[35mALTER TABLE "comentarios" ADD CONSTRAINT "fk_rails_5d4ddb7416"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+[0m
+  ↳ db/schema.rb:110
+  [1m[35m (4.0ms)[0m  [1m[35mALTER TABLE "comentarios" ADD CONSTRAINT "fk_rails_ba3fc881e1"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  ↳ db/schema.rb:111
+  [1m[35m (14.1ms)[0m  [1m[35mALTER TABLE "servicecomments" ADD CONSTRAINT "fk_rails_24af1bdf12"
+FOREIGN KEY ("servicio_id")
+  REFERENCES "servicios" ("id")
+[0m
+  ↳ db/schema.rb:112
+  [1m[35m (3.7ms)[0m  [1m[35mALTER TABLE "servicecomments" ADD CONSTRAINT "fk_rails_a273193e92"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  ↳ db/schema.rb:113
+  [1m[35m (4.9ms)[0m  [1m[35mALTER TABLE "servicios" ADD CONSTRAINT "fk_rails_fba4c96abf"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  ↳ db/schema.rb:114
+  [1m[35m (6.6ms)[0m  [1m[35mALTER TABLE "users" ADD CONSTRAINT "fk_rails_734ddd2c84"
+FOREIGN KEY ("comunas_id")
+  REFERENCES "comunas" ("id")
+[0m
+  ↳ db/schema.rb:115
+  [1m[35m (5.4ms)[0m  [1m[35mALTER TABLE "users" ADD CONSTRAINT "fk_rails_642f17018b"
+FOREIGN KEY ("role_id")
+  REFERENCES "roles" ("id")
+[0m
+  ↳ db/schema.rb:116
+  [1m[35m (5.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (5.7ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ /home/tomas/.rvm/rubies/ruby-2.7.1/lib/ruby/gems/2.7.0/gems/rake-13.0.1/lib/rake/task.rb:281
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ /home/tomas/.rvm/rubies/ruby-2.7.1/lib/ruby/gems/2.7.0/gems/rake-13.0.1/lib/rake/task.rb:281
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /home/tomas/.rvm/rubies/ruby-2.7.1/lib/ruby/gems/2.7.0/gems/rake-13.0.1/lib/rake/task.rb:281
+  [1m[35mSQL (6.7ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  ↳ db/schema.rb:16
+  [1m[35m (79.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "carretes" CASCADE[0m
+  ↳ db/schema.rb:18
+  [1m[35m (64.3ms)[0m  [1m[35mCREATE TABLE "carretes" ("id" bigserial primary key, "title" character varying, "body" text, "user_id" bigint, "max_price" integer, "min_price" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:18
+  [1m[35m (8.1ms)[0m  [1m[35mCREATE  INDEX  "index_carretes_on_user_id" ON "carretes"  ("user_id")[0m
+  ↳ db/schema.rb:18
+  [1m[35m (20.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "comentarios" CASCADE[0m
+  ↳ db/schema.rb:29
+  [1m[35m (26.8ms)[0m  [1m[35mCREATE TABLE "comentarios" ("id" bigserial primary key, "author" character varying, "body" text, "post_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "carrete_id" bigint, "user_id" bigint)[0m
+  ↳ db/schema.rb:29
+  [1m[35m (9.3ms)[0m  [1m[35mCREATE  INDEX  "index_comentarios_on_carrete_id" ON "comentarios"  ("carrete_id")[0m
+  ↳ db/schema.rb:29
+  [1m[35m (10.1ms)[0m  [1m[35mCREATE  INDEX  "index_comentarios_on_post_id" ON "comentarios"  ("post_id")[0m
+  ↳ db/schema.rb:29
+  [1m[35m (8.2ms)[0m  [1m[35mCREATE  INDEX  "index_comentarios_on_user_id" ON "comentarios"  ("user_id")[0m
+  ↳ db/schema.rb:29
+  [1m[35m (12.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "comunas" CASCADE[0m
+  ↳ db/schema.rb:42
+  [1m[35m (23.8ms)[0m  [1m[35mCREATE TABLE "comunas" ("id" bigserial primary key, "nombre" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:42
+  [1m[35m (14.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "posts" CASCADE[0m
+  ↳ db/schema.rb:48
+  [1m[35m (28.3ms)[0m  [1m[35mCREATE TABLE "posts" ("id" bigserial primary key, "author" character varying, "title" character varying, "tipo" character varying, "comment" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:48
+  [1m[35m (11.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "postulacions" CASCADE[0m
+  ↳ db/schema.rb:57
+  [1m[35m (24.4ms)[0m  [1m[35mCREATE TABLE "postulacions" ("id" bigserial primary key, "carrete_id" integer, "postulaciones" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:57
+  [1m[35m (14.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "roles" CASCADE[0m
+  ↳ db/schema.rb:64
+  [1m[35m (27.3ms)[0m  [1m[35mCREATE TABLE "roles" ("id" bigserial primary key, "name" character varying, "code" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:64
+  [1m[35m (2.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "servicecomments" CASCADE[0m
+  ↳ db/schema.rb:71
+  [1m[35m (30.2ms)[0m  [1m[35mCREATE TABLE "servicecomments" ("id" bigserial primary key, "user_id" bigint, "body" text, "servicio_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:71
+  [1m[35m (8.5ms)[0m  [1m[35mCREATE  INDEX  "index_servicecomments_on_servicio_id" ON "servicecomments"  ("servicio_id")[0m
+  ↳ db/schema.rb:71
+  [1m[35m (9.2ms)[0m  [1m[35mCREATE  INDEX  "index_servicecomments_on_user_id" ON "servicecomments"  ("user_id")[0m
+  ↳ db/schema.rb:71
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "servicios" CASCADE[0m
+  ↳ db/schema.rb:81
+  [1m[35m (30.5ms)[0m  [1m[35mCREATE TABLE "servicios" ("id" bigserial primary key, "title" character varying, "user_id" bigint, "body" text, "price" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:81
+  [1m[35m (9.5ms)[0m  [1m[35mCREATE  INDEX  "index_servicios_on_user_id" ON "servicios"  ("user_id")[0m
+  ↳ db/schema.rb:81
+  [1m[35m (27.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  ↳ db/schema.rb:91
+  [1m[35m (27.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "name" character varying, "role_id" bigint, "comunas_id" bigint)[0m
+  ↳ db/schema.rb:91
+  [1m[35m (10.4ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_comunas_id" ON "users"  ("comunas_id")[0m
+  ↳ db/schema.rb:91
+  [1m[35m (9.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  ↳ db/schema.rb:91
+  [1m[35m (9.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  ↳ db/schema.rb:91
+  [1m[35m (9.2ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_role_id" ON "users"  ("role_id")[0m
+  ↳ db/schema.rb:91
+  [1m[35m (28.3ms)[0m  [1m[35mALTER TABLE "carretes" ADD CONSTRAINT "fk_rails_adaf53ffaf"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  ↳ db/schema.rb:108
+  [1m[35m (10.6ms)[0m  [1m[35mALTER TABLE "comentarios" ADD CONSTRAINT "fk_rails_9fd8b4983a"
+FOREIGN KEY ("carrete_id")
+  REFERENCES "carretes" ("id")
+[0m
+  ↳ db/schema.rb:109
+  [1m[35m (6.0ms)[0m  [1m[35mALTER TABLE "comentarios" ADD CONSTRAINT "fk_rails_5d4ddb7416"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+[0m
+  ↳ db/schema.rb:110
+  [1m[35m (4.1ms)[0m  [1m[35mALTER TABLE "comentarios" ADD CONSTRAINT "fk_rails_ba3fc881e1"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  ↳ db/schema.rb:111
+  [1m[35m (12.3ms)[0m  [1m[35mALTER TABLE "servicecomments" ADD CONSTRAINT "fk_rails_24af1bdf12"
+FOREIGN KEY ("servicio_id")
+  REFERENCES "servicios" ("id")
+[0m
+  ↳ db/schema.rb:112
+  [1m[35m (5.8ms)[0m  [1m[35mALTER TABLE "servicecomments" ADD CONSTRAINT "fk_rails_a273193e92"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  ↳ db/schema.rb:113
+  [1m[35m (4.3ms)[0m  [1m[35mALTER TABLE "servicios" ADD CONSTRAINT "fk_rails_fba4c96abf"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  ↳ db/schema.rb:114
+  [1m[35m (10.4ms)[0m  [1m[35mALTER TABLE "users" ADD CONSTRAINT "fk_rails_734ddd2c84"
+FOREIGN KEY ("comunas_id")
+  REFERENCES "comunas" ("id")
+[0m
+  ↳ db/schema.rb:115
+  [1m[35m (8.8ms)[0m  [1m[35mALTER TABLE "users" ADD CONSTRAINT "fk_rails_642f17018b"
+FOREIGN KEY ("role_id")
+  REFERENCES "roles" ("id")
+[0m
+  ↳ db/schema.rb:116
+  [1m[35m (8.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ db/schema.rb:13
+  [1m[35m (2.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20201023211330),
+(20201023231945);
+
+[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (8.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Update (2.1ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "development"], ["updated_at", "2020-11-01 22:51:56.005311"], ["key", "environment"]]
+  ↳ db/schema.rb:13
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ /home/tomas/.rvm/rubies/ruby-2.7.1/lib/ruby/gems/2.7.0/gems/rake-13.0.1/lib/rake/task.rb:281
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ /home/tomas/.rvm/rubies/ruby-2.7.1/lib/ruby/gems/2.7.0/gems/rake-13.0.1/lib/rake/task.rb:281
+  [1m[36mActiveRecord::InternalMetadata Update (1.4ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2020-11-01 22:51:56.022466"], ["key", "environment"]]
+  ↳ /home/tomas/.rvm/rubies/ruby-2.7.1/lib/ruby/gems/2.7.0/gems/rake-13.0.1/lib/rake/task.rb:281
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /home/tomas/.rvm/rubies/ruby-2.7.1/lib/ruby/gems/2.7.0/gems/rake-13.0.1/lib/rake/task.rb:281
+  [1m[35m (3.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/tomas/.rvm/rubies/ruby-2.7.1/lib/ruby/gems/2.7.0/gems/rake-13.0.1/lib/rake/task.rb:281
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (3.4ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Cerrillos"], ["created_at", "2020-11-01 22:51:56.257713"], ["updated_at", "2020-11-01 22:51:56.257713"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.6ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Cerro Navia"], ["created_at", "2020-11-01 22:51:56.266289"], ["updated_at", "2020-11-01 22:51:56.266289"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.7ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Conchalí"], ["created_at", "2020-11-01 22:51:56.270344"], ["updated_at", "2020-11-01 22:51:56.270344"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.7ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "El Bosque"], ["created_at", "2020-11-01 22:51:56.275084"], ["updated_at", "2020-11-01 22:51:56.275084"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.7ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Estación Central"], ["created_at", "2020-11-01 22:51:56.279605"], ["updated_at", "2020-11-01 22:51:56.279605"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.7ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Huechuraba"], ["created_at", "2020-11-01 22:51:56.284498"], ["updated_at", "2020-11-01 22:51:56.284498"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.7ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Independencia"], ["created_at", "2020-11-01 22:51:56.289460"], ["updated_at", "2020-11-01 22:51:56.289460"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.6ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "La Cisterna"], ["created_at", "2020-11-01 22:51:56.294106"], ["updated_at", "2020-11-01 22:51:56.294106"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.6ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "La Florida"], ["created_at", "2020-11-01 22:51:56.298112"], ["updated_at", "2020-11-01 22:51:56.298112"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.7ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "La Granja"], ["created_at", "2020-11-01 22:51:56.302491"], ["updated_at", "2020-11-01 22:51:56.302491"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.8ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "La Pintana"], ["created_at", "2020-11-01 22:51:56.307875"], ["updated_at", "2020-11-01 22:51:56.307875"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.6ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "La Reina"], ["created_at", "2020-11-01 22:51:56.314142"], ["updated_at", "2020-11-01 22:51:56.314142"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.6ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Las Condes"], ["created_at", "2020-11-01 22:51:56.318408"], ["updated_at", "2020-11-01 22:51:56.318408"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.6ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Lo Barnechea"], ["created_at", "2020-11-01 22:51:56.322462"], ["updated_at", "2020-11-01 22:51:56.322462"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.5ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Lo Espejo"], ["created_at", "2020-11-01 22:51:56.326224"], ["updated_at", "2020-11-01 22:51:56.326224"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.6ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Lo Prado"], ["created_at", "2020-11-01 22:51:56.329786"], ["updated_at", "2020-11-01 22:51:56.329786"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.7ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Macul"], ["created_at", "2020-11-01 22:51:56.333698"], ["updated_at", "2020-11-01 22:51:56.333698"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.7ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Maipú"], ["created_at", "2020-11-01 22:51:56.338429"], ["updated_at", "2020-11-01 22:51:56.338429"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.6ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Ñuñoa"], ["created_at", "2020-11-01 22:51:56.343281"], ["updated_at", "2020-11-01 22:51:56.343281"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.6ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Pedro Aguirre Cerda"], ["created_at", "2020-11-01 22:51:56.347329"], ["updated_at", "2020-11-01 22:51:56.347329"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.6ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Peñalolén"], ["created_at", "2020-11-01 22:51:56.351357"], ["updated_at", "2020-11-01 22:51:56.351357"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.7ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Providencia"], ["created_at", "2020-11-01 22:51:56.356344"], ["updated_at", "2020-11-01 22:51:56.356344"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.7ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Pudahuel"], ["created_at", "2020-11-01 22:51:56.360745"], ["updated_at", "2020-11-01 22:51:56.360745"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.7ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Quilicura"], ["created_at", "2020-11-01 22:51:56.366620"], ["updated_at", "2020-11-01 22:51:56.366620"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.7ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Quinta Normal"], ["created_at", "2020-11-01 22:51:56.371915"], ["updated_at", "2020-11-01 22:51:56.371915"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.7ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Recoleta"], ["created_at", "2020-11-01 22:51:56.376807"], ["updated_at", "2020-11-01 22:51:56.376807"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.7ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Renca"], ["created_at", "2020-11-01 22:51:56.381229"], ["updated_at", "2020-11-01 22:51:56.381229"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.7ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "San Joaquín"], ["created_at", "2020-11-01 22:51:56.385760"], ["updated_at", "2020-11-01 22:51:56.385760"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.7ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "San Miguel"], ["created_at", "2020-11-01 22:51:56.389948"], ["updated_at", "2020-11-01 22:51:56.389948"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.7ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "San Ramón"], ["created_at", "2020-11-01 22:51:56.394402"], ["updated_at", "2020-11-01 22:51:56.394402"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.7ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Santiago"], ["created_at", "2020-11-01 22:51:56.398796"], ["updated_at", "2020-11-01 22:51:56.398796"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mComuna Create (0.7ms)[0m  [1m[32mINSERT INTO "comunas" ("nombre", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["nombre", "Vitacura"], ["created_at", "2020-11-01 22:51:56.404047"], ["updated_at", "2020-11-01 22:51:56.404047"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
