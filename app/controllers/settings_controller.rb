@@ -1,5 +1,5 @@
+# frozen_string_literal: true
+
 class SettingsController < ApplicationController
-  before_action :authenticate_user!, only: [:display]
-  def display
-  end
+  def display; end
 end

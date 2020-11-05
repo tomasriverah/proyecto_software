@@ -1,6 +1,9 @@
 Metrics/LineLength:
   Max: 160
 
+Metrics/BlockLength:
+  Enabled: False
+
 Layout/IndentationWidth:
   Description: 'Use 2 spaces for indentation.'
   StyleGuide: '#spaces-indentation'
@@ -14,7 +17,14 @@ Layout/MultilineHashBraceLayout:
 Documentation:
   Enabled: false
 
+Layout/EndOfLine:
+  Enabled: False
 
+Style/MixinUsage:
+  Enabled: False
+
+Naming/AccessorMethodName:
+  Enabled: False
 
 Metrics/BlockLength:
   Max: 50

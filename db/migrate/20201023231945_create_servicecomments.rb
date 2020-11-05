@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateServicecomments < ActiveRecord::Migration[5.2]
   def change
     create_table :servicecomments do |t|

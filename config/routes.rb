@@ -34,12 +34,12 @@ Rails.application.routes.draw do
   match '/profile/blabla' => 'profile#make_service', :via => :get
   match '/users/:id' => 'profile#destroy', :via => :delete, :as => :user
 
-  post "postulacion" => "postulacions#postular"
+  post 'postulacion' => 'postulacions#postular'
 
   resources :carretes do
     resources :comentarios
     resources :postulacion
-    #get 'carretes/:id/comentarios_carrete' 
+    # get 'carretes/:id/comentarios_carrete'
   end
 
   resources :servicio do

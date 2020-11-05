@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "ComentariosServicios", type: :request do
-
+RSpec.describe 'ComentariosServicios', type: :request do
 end

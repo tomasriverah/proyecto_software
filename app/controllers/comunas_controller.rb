@@ -1,13 +1,14 @@
+# frozen_string_literal: true
+
 class ComunasController < ApplicationController
-
   def create
-      @comuna = Comuna.new(comuna_params)
+    @comuna = Comuna.new(comuna_params)
 
-      if @comuna.save
-          redirect_to comunas_path, notice: 'Comuna agregada con éxito'
-      else
-          render :new
-      end
+    if @comuna.save
+      redirect_to comunas_path, notice: 'Comuna agregada con éxito'
+    else
+      render :new
+    end
   end
 
   def index
@@ -27,14 +28,14 @@ class ComunasController < ApplicationController
   end
 
   def destroy
-  	@comuna = Comuna.find(params[:id])
+    @comuna = Comuna.find(params[:id])
     @comuna.destroy
     redirect_to comunas_index_path, notice: 'Comuna borrada con exito'
   end
 
   def update
     @comuna = Comuna.find(params[:id])
-  
+
     if @comuna.update(comuna_params)
       redirect_to @comuna
     else

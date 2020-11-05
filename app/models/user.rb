@@ -18,7 +18,7 @@ class User < ApplicationRecord
   def update_role(role)
     update(role_id: role)
   end
-  
+
   private
 
   def set_default_role
