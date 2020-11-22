@@ -15,6 +15,7 @@ body{
 <br>
   <div class="columns ">
     <div class="column is-one-quarter">
+    <%if current_user%>
       <div class="card">
       <header class="card-header">
         <p class="card-header-title">
@@ -46,6 +47,7 @@ body{
         </div>
         
       </div>
+    <%end%>
     </div>
     <div class="column is-half">
         <div class="card">

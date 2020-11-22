@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CarretesController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create index show]
+  before_action :authenticate_user!, only: %i[new create edit index show]
   def new
     @carrete = Carrete.new
   end
