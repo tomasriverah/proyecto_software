@@ -173,7 +173,7 @@
                   <div class="media-content">
                     <div class="content">
                       <p>
-                        <%= comment.user.name %>
+                        <b><%= comment.user.name %></b>
                         <br>
                         <%= comment.body %>
                       </p>
@@ -193,7 +193,11 @@
                     </nav>
                   </div>
                   <div class="media-right">
-                    <button class="delete"></button>
+                    <% if comment.user == current_user || @carrete.user == current_user%>
+                        <%= link_to '', [comment.carrete, comment],
+                          :method => :delete,
+                        :data => { :confirm => '¿Estás seguro?' }, class: 'delete' %>
+                    <%end%>
                   </div>
                 </article>
                 <% end %>
