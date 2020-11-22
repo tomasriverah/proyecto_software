@@ -18,6 +18,28 @@ class PostulacionsController < ApplicationController
     @postulacion = Postulacion.find(params[:postulacion][:id])
     @postulacion.postulaciones[params[:postulacion][:user_id]] = params[:monto]
     @postulacion.save
+
+    @carrete = Carrete.find(postulacion_params[:carrete_id])
+    redirect_to carrete_path(@carrete)
+  end
+
+  def send_notificacion(postulacion)
+    @carrete = Carrete.find(postulacion.carrete_id)
+    texto = 'Felicitaciones tu postulación ha sido aceptada, estás invitado a ' + @carrete.title + '.'
+    postulacion.postulaciones.each do |uid, _monto|
+      notificiacion = Notification.new
+      notificiacion.user_id = uid
+      notificiacion.n_text = texto
+      notificiacion.is_checked = false
+      notificiacion.save
+    end
+  end
+
+  def close_postulacion
+    @postulacion = Postulacion.find(params[:id])
+    @postulacion.is_open = 0
+    @postulacion.save
+    send_notificacion(@postulacion)
   end
 
   def display; end

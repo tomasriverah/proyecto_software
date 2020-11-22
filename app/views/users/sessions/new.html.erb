@@ -1,14 +1,24 @@
-<h2>Log in</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<section class="hero is-light is-bold">
+  <div class="hero-body">
+      <div class="columns is-centered">
+        <div class="column.is-half.is-offset-one-quarter">
+        <div class = "has-text-centered">
+        <h1 class= "title"> DCCarrete </h1>
+        </div>
+        <br>
+        <div class="card">
+          <div class="card-content">
+          
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input" %>
   </div>
 
   <div class="field">
     <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+    <%= f.password_field :password, autocomplete: "current-password", class: "input" %>
   </div>
 
   <% if devise_mapping.rememberable? %>
@@ -19,8 +29,14 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "Log in", class: "button is-success is-fullwidth" %>
   </div>
 <% end %>
 
 <%= render "users/shared/links" %>
+          </div>
+        </div>
+        </div>
+    </div>
+  </div>
+</section>

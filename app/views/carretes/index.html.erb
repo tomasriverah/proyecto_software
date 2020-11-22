@@ -1,32 +1,116 @@
-<h1>Carretes disponibles</h1>
-<%= link_to 'Crear Carrete', :action => :new%>
-<br></br>
-<div class="carrete-list">
-	<% @carrete.each do |carrete| %>
-	<div class= "carretes-list___item">
-		Titulo: <%= carrete.title %>
-		Autor: <%= carrete.user.name%>
-		Comuna(s): <%= Comuna.find(carrete.user.comunas_id).nombre%>
-		Descripción: <%= carrete.body %>
-		Precio máximo: <%= carrete.max_price %>
-		Precio minimo: <%= carrete.min_price %>
-		<p>
-		 <%= link_to 'Abrir', 
-		 :action => :show, 
-		 :id => carrete.id %>
+ <% @image_dict = {1 => "https://www.ctvnews.ca/polopoly_fs/1.5063738.1597360423!/httpImage/image.jpg_gen/derivatives/landscape_1020/image.jpg",
+				  2 =>  "https://i2.wp.com/www.society19.com/uk/wp-content/uploads/sites/5/2019/04/uk-1231-920337-0-front.jpg?fit=%2C&ssl=1",
+				  3 =>  "https://www.thespruce.com/thmb/pE5Jk1wtueXSKrpm52bv5GFFOvg=/1800x1012/smart/filters:no_upscale()/GettyParty-5b35eb3c46e0fb003788537e.jpg",
+				  4 =>  "https://www.electronicbeats.net/app/uploads/2017/04/arma17_club.jpg"}  %>
+<style>
+ .column {
+  gap: flex;
+}
+.card .card-image,
+.card .card-image .image img {
+  height: 170px;
+}
 
-		 <% if carrete.user == current_user %>
-	     <%= link_to 'Editar',
-             :action => :edit, 
-             :id => carrete.id
-             %>
-         <%= link_to 'Borrar Publicación',
-         { :action => :destroy, :id => carrete.id }, 
-         :method => :delete, 
-         :data => { :confirm => 'Are you sure?' }
-             %>
-         <% end %>
-        </p>
-	</div>
-	<% end %>
+label {
+    /* Other styling... */
+    text-align: right;
+    clear: both;
+    float:left;
+    margin-right:15px;
+}
+
+</style>
+
+ <div class="hero is-fullheight is-light is-bold">
+  <br>
+<h1 class= "title is-2 has-text-centered">Carretes disponibles</h1>
+<div class= "columns is-centered">
+<%= link_to 'Crear Carrete', carretes_new_url, class: "button is-primary"%>
 </div>
+
+<%= form_with url: carretes_index_url,method: "get" do |f| %>
+                    <div class="columns is-centered">
+                    <div class ="column is-one-third" >
+                    <div class="card">   
+                    <div class="card-content">   
+                    <div class="field is-horizontal">
+                      <div class="field-label ">
+                        <label class="label">Comuna</label>
+                      </div>
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                              <div class = "select">
+                                <%= f.hidden_field :filter, :value => true %>
+                                <%= f.select :comunas_id, Comuna.all.collect { |p| [ p.nombre, p.id ] }%>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="field is-horizontal">
+                      <div class="field-label">
+                        <label class="label">Precio minimo</label>
+                      </div>
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <%= text_field_tag :precio_min, nil, class: "input"%>  
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="actions has-text-centered">
+                      <%= f.submit "Filtrar", class: "button is-info " %>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+    <%end%>
+<br>
+<div class="carrete-list is-centered">
+<div class="columns is-multiline is-centered is-3">
+<% @i = 0%>
+	<% @carrete.each do |carrete| %>
+	<% @i += 1%>
+	<% if @i == 5%>
+	<% @i = 1%>
+	<% end%>
+    <div class="column is-one-quarter">
+	<div class="card is-half">
+  <header class="card-header">
+    <p class="card-header-title">
+      <%= carrete.title%>
+    </p>
+	<a href="#" class="card-header-icon" aria-label="more options">
+      <span class="icon">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
+    </a>
+  </header>
+  <div class="card-image is-260x130">
+    <figure class="image is-260x130">
+      <img src=<%=@image_dict[@i]%> alt="Placeholder image">
+    </figure>
+	 </div>
+  <div class="card-content">
+    <div class="content">
+      <b>Comuna:</b> <%= Comuna.find(carrete.comuna_id).nombre %>
+      <br>
+	  <b>Creado por:</b> <%= carrete.user.name%>
+	  <br>
+    <b>Fecha: </b> <%= carrete.fecha%>
+    </div>
+  </div>
+  <footer class="card-footer">
+	<%= link_to 'Abrir', carretes_show_url(id: carrete.id), class: "card-footer-item" %></
+  </footer>
+  
+</div>
+</div>
+
+	<% end %>
+	</div>
+</div>
+ </div>

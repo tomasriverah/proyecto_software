@@ -1,0 +1,2 @@
+class UserDescripcion < ApplicationRecord
+end

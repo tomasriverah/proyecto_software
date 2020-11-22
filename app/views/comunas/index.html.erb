@@ -1,17 +1,35 @@
-<h1>Comunas</h1>
-
-<%=link_to "Agregar comuna", comunas_new_path%>
+<%if current_user.role_id!=2%>
+<script type='text/javascript'>
+    window.location.href="/";
+    window.alert("No tienes permisos");
+</script>
+<%end%>
+<div class="hero is-fullheight is-light is-bold">
 <br>
-<div class="comuna list">
-<% @comuna.each do |comuna| %>
-   <%= comuna.nombre%> <br>
-   <%# <%= link_to 'Editar', edit_comuna_url(comuna)%>  
-   <%= link_to 'Eliminar',
-         { :action => :destroy, :id => comuna.id }, 
-         :method => :delete, 
-         :data => { :confirm => 'Are you sure?' }
-             %>
-   <br>
+    <div class="columns is-centered">
+        <div class='column is-one-quarter'>
+        <div class=card>
+        <div class='card-content'>
+        
+            <h1 class= "title has-text-centered">Comunas</h1>
+
+            <%=link_to "Agregar comuna", comunas_new_path, class: 'button is-link'%>
+            <br>
+            <ul class="comuna list">
+            <% @comuna.each do |comuna| %>
+            <li><%= comuna.nombre%><br>
+            <%= link_to 'Eliminar',
+                    { :action => :destroy, :id => comuna.id }, 
+                    :method => :delete, 
+                    :data => { :confirm => 'Are you sure?' }, class: "button is-danger"
+                        %></li>
+                        <br>
+                        <% end %>
+            </ul>
+        
+        </div>
+        </div>
+        </div>
+    </div>
 </div>
-<% end %>
 

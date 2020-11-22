@@ -1,0 +1,32 @@
+<%if current_user.role_id!=2%>
+<script type='text/javascript'>
+    window.location.href="/";
+    window.alert("No tienes permisos");
+</script>
+<%end%>
+<div class="hero is-fullheight is-light is-bold">
+    <div class="columns is-centered">
+        <div class='column is-one-fifth'>
+            <div class='card'>
+                <div class='card-content'>
+                    <h1 class= "title has-text-centered">Nuevo Admin</h1>
+                    <%= form_with model: @user, :url => { :action => :make_admin } do |f| %>
+                        <div class='columns is-centered'>
+                            <div class='column is-half'>
+                                <%= f.label :user, 'Usuario: '%><br>
+                                <div class = "select is-info">
+                                    <%= f.select :id, @users.collect { |p| [ p.name, p.id ] }, :include_blank => true %>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="card-footer">
+                            <div class="card-footer-item">
+                                <%= f.submit "Hacer admin", class:'button is-success' %>
+                            </div>
+                        </footer>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

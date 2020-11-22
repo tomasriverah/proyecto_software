@@ -1,0 +1,79 @@
+<%if current_user.role_id!=2%>
+<script type='text/javascript'>
+    window.location.href="/";
+    window.alert("No tienes permisos");
+</script>
+<%end%>
+<% @image_dict = {1 => "https://wherelunch.files.wordpress.com/2015/02/ruta_cocteleria_.jpg",
+				  2 =>  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScXDEHPaU_36C1D6A27BRsVOPcTcz_fDtxHw&usqp=CAU",
+				  3 =>  "https://www.thespruce.com/thmb/pE5Jk1wtueXSKrpm52bv5GFFOvg=/1800x1012/smart/filters:no_upscale()/GettyParty-5b35eb3c46e0fb003788537e.jpg",
+				  4 =>  "https://www.electronicbeats.net/app/uploads/2017/04/arma17_club.jpg"}  %>
+
+<style>
+ .column {
+  gap: flex;
+}
+.card .card-image,
+.card .card-image .image img {
+  height: 170px;
+}
+</style>
+
+ <div class="hero is-fullheight is-light is-bold">
+  <br>
+<h1 class= "title is-2 has-text-centered">Servicios para revisión</h1>
+<div class="columns">
+<div class="column is-one-quarter">
+</div>
+<div class="column is-one-quarter">
+</div>
+</div>
+<div class="servicio-list is-centered">
+<div class="columns is-multiline is-centered is-3">
+<% @i = 0%>
+	<% @servicio_pendiente.each do |servicio| %>
+	<% @i += 1%>
+	<% if @i == 5%>
+	<% @i = 1%>
+	<% end%>
+<div class="column is-one-quarter">
+	<div class="card is-half">
+  <header class="card-header">
+    <p class="card-header-title">
+      <%= servicio.title%>
+    </p>
+	<a href="#" class="card-header-icon" aria-label="more options">
+      <span class="icon">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
+    </a>
+  </header>
+  <div class="card-image is-260x130">
+    <figure class="image is-260x130">
+      <img src=<%=@image_dict[@i]%> alt="Placeholder image">
+    </figure>
+	 </div>
+  <div class="card-content">
+    <div class="content">
+	  <b>Comuna(s):</b> <% servicio.comunas.each do |comuna|%>
+	  <%=comuna.nombre%>
+	  <% end %>
+	  <br>
+	  <b>Precio: </b>$<%=servicio.price %>
+    <br>
+    <b>Oferente: </b><%=servicio.user.name %>
+    </div>
+  </div>
+  <footer class="card-footer">
+	<%= link_to 'Aprobar', { :action => :aprobar, :id => servicio.id }, class: "card-footer-item" %>
+	<%= link_to 'Borrar Servicio', { :action => :destroy, :id => servicio.id }, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: "card-footer-item"%>
+    
+  </footer>
+  
+</div>
+</div>
+
+	<% end %>
+	</div>
+</div>
+ </div>

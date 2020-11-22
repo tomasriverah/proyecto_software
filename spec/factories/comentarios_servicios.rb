@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :comentarios_servicio do
     servicio { nil }
     user { nil }
-    body { "MyText" }
+    body { 'MyText' }
   end
 end

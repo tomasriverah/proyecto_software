@@ -1,21 +1,54 @@
-<h1>Crea tu oferta de Servicio</h1>
+<div class="hero is-fullheight is-light is-bold">
+<br>
+	<div class='columns is-centered'>
+		<div class='column is-half'>
+			<div class="card">
+				<div class="card-content">
+					<h1 class= "title has-text-centered">Crea tu oferta de Servicio</h1>
+					<% if @servicio.errors.any? %>
+					<div>
+						Se encontraron errores:
+						<ul>
+							<% @servicio.errors.full_messages.each do |error_message| %>
+							<li><%= error_message %></li>
+							<% end %>
+						</ul>
+					</div>
+					<% end %>
+					<%= form_with model: @servicio, :url => { :action => :create }, local: true do |f| %>
+					<div class='columns'>
+            		<div class='column is-half'>
+					<p><%= f.label :title, 'Titulo: ' %><br><%= f.text_field :title, class: 'input is-info' %></p>
+					<p><%= f.label :body, 'Descripción: ' %><br><%= f.text_area :body, class: "textarea is-info", rows: 10 %></p>
+					<p><%= f.label :price, 'Precio: ' %><%= f.text_field :price, class: 'input is-info' %></p>
+					<footer class="card-footer">
+              		<div class="card-footer-item">
+					<%= f.submit "Ofrecer Servicio", class: 'button is-primary is-3' %>
+					<br>
+					</div>
+					<div class="card-footer-item">
+					<%= link_to "Cancelar", servicio_index_url, class: "button is-link" %>
+					<br>
+					</div>
+              		</footer> 
+					
+					</div>
+					<div class='column is-half'>
+					<p class='title has-text-centered'><%= f.label :comunas %><br /></p>
+						<% for comuna in Comuna.all %>
+						<%= check_box_tag "servicio[comuna_ids][]", comuna.id, @servicio.comunas.include?(comuna)%>
+						<%=h comuna.nombre %><br />
+						<% end %>
+					<p><%= f.hidden_field :status, :value => 'pendiente'%></p>
+					<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+</div>
 
-<% if @servicio.errors.any? %>
- <div>
- 	Se encontraron errores:
- 	<ul>
- 		<% @servicio.errors.full_messages.each do |error_message| %>
- 		<li><%= error_message %></li>
- 		<% end %>
- 	</ul>
- </div>
-<% end %>
 
-<%= form_with model: @servicio, :url => { :action => :create }, local: true do |f| %>
- <p><%= f.label :title, 'Titulo: ' %><%= f.text_field :title %></p>
- <p><%= f.label :body, 'Descripción: ' %><%= f.text_field :body %></p>
- <p><%= f.label :price, 'Precio: ' %><%= f.text_field :price %></p>
- <%= f.submit "Ofrecer Servicio" %>
-<% end %>
 
-<%= link_to 'Back', :action => :index %>
+
+		

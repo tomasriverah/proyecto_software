@@ -1,56 +1,133 @@
-<p>
-  <strong>Titulo: </strong>
-  <%= @servicio.title %>
-</p>
+<div class="hero is-fullheight is-light is-bold">
+  <div class="columns ">
+    <div class="column">
+      <div class="columns is-centered ">
+        <div class="column is-half ">
+          <div class="card">
+            <div class="card-content">
+                <p class="card-header-title">
+                  <h1 class= "title has-text-centered"> <%= @servicio.title  %><h1>
+                </p>
+                <div class="columns ">
+                <div class="column is-three-quarters">
+                    <p>
+                      <strong>Descripción: </strong><br>
+                      <%= @servicio.body %>
+                    </p>
+                    <p>
+                    <strong>Autor: </strong>
+                    <%= @servicio.user.name %>
+                  </p>
+                  <p>
+                  <strong>Comuna(s): </strong>
+                  <% @servicio.comunas.each do |comuna|%>
+                  <%= comuna.nombre%>
+                  <%end%>
+                </p>
+                <p>
+                <strong>Precio: $<%= @servicio.price %></strong>
+              </p>
+              </div>
+              <div class="column is-one-quarter">
+                <%= link_to "Volver", servicio_index_url, class: "button is-primary is-fullwidth" %>
+                <br>
+              <%if @servicio.user == current_user%>
+                <%= link_to 'Modificar', servicio_edit_url(id: @servicio.id), class:"button is-link is-fullwidth"%>
+                <br>
+                <%= link_to 'Eliminar', { :action => :destroy, :id => @servicio.id }, 
+                    :method => :delete, 
+                    :data => { :confirm => 'Are you sure?' } , class: "button is-danger is-fullwidth"
+                        %>
+                <%end%>
+              </div>
+              </div>
+              <footer class="card-footer">
+              <%if @servicio.status=='aprobado'%>
+              <div class="card-footer-item">
+              <p class="is-centered"> 
+              Verificado por DCCarrete 
+              <span class="icon has-text-success">
+              <i class="fas fa-check-square"></i>
+              </span>
+              </p>
+              </div>
+              <%end%>
+              </footer>
+            </div>
+            </div>
+            <div class="card">
+              <div class="card-content">
+                <h2 class="title is-4 has-text-centered">Comentarios</h2>
+                <% @servicio.servicecomments.each do |comment| %>
+                <div class = "container ">
+                <article class="media">
+                  <figure class="media-left">
+                    <p class="image is-64x64">
+                      <img src="https://i.pinimg.com/originals/d1/ad/13/d1ad13605acd060cbcc4b334e2119883.png">
+                    </p>
+                  </figure>
+                  <div class="media-content">
+                    <div class="content">
+                      <p>
+                        <%= comment.user.name %>
+                        <br>
+                        <%= comment.body %>
+                        <% if comment.user == current_user || @servicio.user == current_user%>
+                        <%= link_to 'Eliminar Comentario', [comment.servicio, comment],
+                          :method => :delete,
+                        :data => { :confirm => '¿Estás seguro?' } %>
+                        <%end%>
+                      </p>
+                    </div>
+                    <nav class="level is-mobile">
+                      <div class="level-left">
+                        <a class="level-item">
+                          <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                        </a>
+                        <a class="level-item">
+                          <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                        </a>
+                        <a class="level-item">
+                          <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                        </a>
+                      </div>
+                    </nav>
+                  </div>
+                  <div class="media-right">
+                    <button class="delete"></button>
+                  </div>
+                </article>
+                <% end %>
+                <%= form_for([@servicio, @servicio.servicecomments.build]) do |f| %>
+                <article class="media">
+                  <figure class="media-left">
+                    <p class="image is-64x64">
+                      <img src="https://i.pinimg.com/originals/d1/ad/13/d1ad13605acd060cbcc4b334e2119883.png">
+                    </p>
+                  </figure>
+                  <div class="media-content">
+                    <div class="field">
+                      <p class="control">
+                        <%= f.text_area :body, class: "textarea", placeholder: "Escribe tu comentario..." %>
+                      </p>
+                    </div>
+                    <nav class="level">
+                      <div class="level-left">
+                        <div class="level-item">
+                          <a >
+                          <%= f.submit 'Enviar', class: "button is-info" %>
+                          <% end %>
+                          </a>
+                        </div>
+                      </div>
+                    </nav>
+                  </div>
+                </article>
+              </div>
+            </div> 
+        </div>       
+      </div>
+    </div>  
+  </div>
+</div>
 
-<p>
-  <strong>Autor: </strong>
-  <%= @servicio.user.name %>
-</p>
-
-<p>
-  <strong>Comuna(s): </strong>
-  <%= Comuna.find(@servicio.user.comunas_id).nombre%>
-</p>
-
-<p>
-  <strong>Descripción: </strong>
-  <%= @servicio.body %>
-</p>
-
-<p>
-  <strong>Precio: <%= @servicio.price %></strong>
-</p>
-
-<h2>Comentarios</h2>
-<% @servicio.servicecomments.each do |comment| %>
-  <p>
-    Autor:
-    <%= comment.user.name %>
-  </p>
-
-  <p>
-    Comentario:
-    <%= comment.body %>
-  </p>
-
-  <p>
-  <%= link_to 'Eliminar Comentario', [comment.servicio, comment],
-               :method => :delete,
-               :data => { :confirm => '¿Estás seguro?' } %>
-  </p>
-<% end %>
-
-<h2>Escribe un comentario:</h2>
-<%= form_for([@servicio, @servicio.servicecomments.build]) do |f| %>
-  <p>
-    <%= f.label :Contenido %><br />
-    <%= f.text_area :body %>
-  </p>
-  <p>
-    <%= f.submit 'Crear comentario'%>
-  </p>
-<% end %>
-
-<%= link_to 'Back', :action => :index %>
-| <%= link_to 'Edit', :action => :edit, :id => @servicio.id %>

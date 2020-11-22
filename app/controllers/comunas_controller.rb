@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ComunasController < ApplicationController
+  before_action :authenticate_user!, only: %i[:index :new :edit]
   def create
     @comuna = Comuna.new(comuna_params)
 
@@ -12,11 +13,7 @@ class ComunasController < ApplicationController
   end
 
   def index
-    @comuna = Comuna.all
-  end
-
-  def show
-    @comuna = Comuna.find(params[:id])
+    @comuna = Comuna.order(:nombre)
   end
 
   def new

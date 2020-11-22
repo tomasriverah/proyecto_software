@@ -1,6 +1,151 @@
-<h1>Nombre Usuario: <%= current_user.name %> </h1>
-<p>Esta pagina desplega el nombre de usuario y permite customizar algunos atributos</p>
-<p>Comuna: <%= Comuna.find(current_user.comunas_id).nombre%><p>
-<p>¿ Deseas ser proveedor de Servicio ? <%= button_to "Service Enable", 'blabla' ,method: :get %><br><p>
-<p>¿ Deseas ser Admin ? <%= button_to "Admin Enable", user_path(current_user) ,method: :get %><br><p>
-<%= link_to "Editar información de usuario", edit_user_registration_path %>
+<div class='hero is-fullheight is-light is-bold'>
+<br>
+<div class="level is-fluid">
+	<div class="level-item">
+		<div class="columns is-centered">
+  			<div class="column is-8">
+  				<p class= "">
+				¿ Deseas ser Admin ? 
+				<%= button_to "Ser administrador", user_path(current_user) ,method: :get,
+				class: "button is-primary"%>
+			</div>
+
+ 			<div class="column is-8">
+  				<p class= "">
+				¿ Deseas ser proveedor de Servicio ? 
+				<%= button_to "Ser proveedor de servicio", 'blabla' ,method: :get,
+	 			class: "button is-primary"%><br>
+	 		</div>
+	 	</div>
+	</div>
+</div>
+  <div class='columns is-centered'>
+    <div class='column is-four-fifths'>
+      <div class='card'>
+        <div class='card-content'>
+          <div class='hero is-primary'>
+            <br>
+            <div class='columns is-centered'>
+              <div class='column is-one-fifth'>
+                <figure class="media-left">
+                  <p class="image is-128x128">
+                    <img class='is-rounded' src="https://i.pinimg.com/originals/d1/ad/13/d1ad13605acd060cbcc4b334e2119883.png">
+                  </p>
+                </figure>
+              </div>
+              <div class='column is-two-fifths'>
+                <h1 class="title">
+                  <%= current_user.name %>
+                </h1>
+                <h2 class="subtitle">
+                  Comuna del usuario: <%= Comuna.find(current_user.comunas_id).nombre%>
+                </h2>
+                <h2 class="subtitle">
+                  <% if current_user.role_id == 1%>
+                    Rol del usuario: Normal
+                  <% elsif current_user.role_id == 2%>
+                    Rol del usuario: Administrador
+                  <% elsif current_user.role_id == 3%>
+                    Rol del usuario: Proveedor de Servicio
+                  <% end %>
+                </h2>
+                <h2 class="subtitle">
+                  Creador de <strong><%= @carretes.count%></strong> Carrete(s).
+                </h2>
+                <% if current_user.role_id == 3 ||current_user.role_id == 2 %>
+                <h2 class="subtitle">
+                  Creador de <strong><%=@servicios.count%></strong> Servicio(s).
+                </h2>
+                <% end %>
+              </div>
+              <div class='column is-one-fifth'>
+                <br>
+                <%= link_to "Editar información", edit_user_registration_path , class: "button is-link is-fullwidth"%>
+                <br>
+                <%= link_to 'Crear Carrete', carretes_new_url, class: "button is-link is-fullwidth"%>
+                <br>
+                <%= link_to 'Ofrecer Servicio', servicio_new_url, class: "button is-link is-fullwidth"%>
+              </div>
+            </div>
+            <br>
+          </div>
+        <br>
+        <h1 class='subtitle is-4'> Mis Carretes<h1>
+        <% @carretes.each do |carrete|%>
+          <div class='card'>
+            <div class='card-content'>
+              <div class=columns>
+                <div class='column is-three-quarters'>
+                  <div class=columns>
+                    <div class='column is-half'>
+                      <%=link_to carretes_show_url(id: carrete.id) do%>
+                      <h1 class='subtitle is-5'><%=carrete.title%></h1>
+                      <%end%>
+                      <br>
+                      <p><strong>Direccion: </strong><%=carrete.direccion%>, <%=Comuna.find(carrete.comuna_id).nombre%></p>
+                      <p><strong>Fecha: </strong><%=carrete.fecha%></p>
+                      <p><strong>Capacidad: </strong><%=carrete.capacidad_maxima%></p>
+                      <p><strong>Fecha de creación: </strong><%=carrete.created_at.strftime("%d/%m/%Y")%></p>
+                    </div>
+                    <div class='column is-half'>
+                    <strong>Descripcion: </strong>
+                    <br>
+                    <%=carrete.body%>
+                    </div>
+                  </div>
+                </div>
+                <div class=column>
+                <%= link_to 'Modificar', carretes_edit_url(id: carrete.id), class:"button is-link is-fullwidth"%>
+                    <br>
+                    <%= link_to 'Eliminar', { :action => "destroy_from_profile", :controller => "carretes", :id => carrete.id }, 
+                    :method => :delete, :data => { :confirm => 'Are you sure?' } , 
+                    class: "button is-danger is-fullwidth"%>
+                </div>
+              </div>
+            </div>
+          </div>
+        <%end%>
+        <br>
+        <h1 class='subtitle is-4'> Mis Servicios<h1>
+        <% @servicios.each do |servicio|%>
+          <div class='card'>
+            <div class='card-content'>
+              <div class=columns>
+                <div class='column is-three-quarters'>
+                  <div class=columns>
+                    <div class='column is-half'>
+                      <%=link_to servicio_show_url(id: servicio.id) do%>
+                      <h1 class='subtitle is-5'><%=servicio.title%></h1>
+                      <%end%>
+                      <br>
+                      <p><strong>Comuna(s): </strong><% servicio.comunas.each do |comuna|%>
+                                                      <%= comuna.nombre%>
+                                                    <%end%>
+                                                    </p>
+                      <p><strong>Fecha de creación: </strong><%=servicio.created_at.strftime("%d/%m/%Y")%></p>
+                      <p><strong>Precio: </strong><%=servicio.price%></p>
+                      <p><strong>Estado: </strong><%=servicio.status%></p>
+                    </div>
+                    <div class='column is-half'>
+                    <strong>Descripcion: </strong>
+                    <br>
+                    <%=servicio.body%>
+                    </div>
+                  </div>
+                </div>
+                <div class=column>
+                <%= link_to 'Modificar', servicio_edit_url(id: servicio.id), class:"button is-link is-fullwidth"%>
+                    <br>
+                    <%= link_to 'Eliminar', { :action => "destroy_from_profile", :controller => "servicio", :id => servicio.id }, 
+                    :method => :delete, :data => { :confirm => 'Are you sure?' } , 
+                    class: "button is-danger is-fullwidth"%>
+                </div>
+              </div>
+            </div>
+          </div>
+        <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

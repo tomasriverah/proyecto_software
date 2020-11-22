@@ -1,3 +1,71 @@
-<h1>Pagina Principal</h1>
-<h1> <%=@active_users%> Usuarios Activos </h1>
-<p>Desde esta pagina puedes crear una cuenta y puedes iniciar sesión.</p>
+<style>
+body{
+    background-image: url('https://media2.giphy.com/media/YPdztBLh6H2pYxn1MA/giphy.gif');
+    background-size: cover;
+    
+    
+    
+    height: 100vh;
+    padding:20;
+    margin:0;
+}
+</style>
+
+
+<br>
+  <div class="columns ">
+    <div class="column is-one-quarter">
+      <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          Próximos Carretes
+        </p>
+        <a href="#" class="card-header-icon" aria-label="more options">
+          <span class="icon">
+            <i class="far fa-calendar-plus" aria-hidden="true"></i>
+          </span>
+        </a>
+      </header>
+        <div class="card-content">
+        
+        <% @carretes = Carrete.all.sort_by &:fecha%>
+        <% @i = 0%>
+        <% @carretes.each do |carrete|%>
+        <% @i += 1%>
+        <%if @i <= 3%>
+        <div class="dropdown-item">
+        <span class="tag is-light is-large">
+        <%=  link_to carrete.title, "carretes/show?id=" + carrete.id.to_s %>
+        </span>
+        <br>
+        <%='Fecha: ' + carrete.fecha.strftime('%d-%m-%Y').to_s%>
+        </div>
+        <hr class="dropdown-divider">
+        <%end%>
+        <%end%>
+        </div>
+        
+      </div>
+    </div>
+    <div class="column is-half">
+        <div class="card">
+            <div class="card-content">
+                <p class="card-header-title">
+                  <h1 class="title is-2 has-text-centered">Bienvenido a DCCarrete</h1>
+                </p>
+                <h1 class="subtitle is-2"><%=@active_users%> Usuarios Activos </h1>
+                <h1 class="subtitle is-2"><%=Carrete.count%> Carretes online </h1> 
+                <%if current_user%>
+                <h1 class="subtitle is-4"><%=current_user.name%> es un gusto verte.</h1>
+                <%else%>
+                <h1 class="subtitle is-4">Inicia sesión o regístrate.</h1>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <div class="colum is-one-quarter">
+    </div>
+  </div>
+
+
+

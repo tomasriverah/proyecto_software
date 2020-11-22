@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DCCarrete</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= link_to "Home", root_path%>
+    <%= link_to "Sign up", new_user_registration_path%>
+    <%= link_to "Sign in", new_user_session_path%>
+    
+    <% if user_signed_in? %>
+    
+    <%= link_to "config", settings_path%>
+    <%= link_to "Carretes", carretes_index_url%>
+    <%= link_to "Servicios", servicio_index_url%>
+    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+    <%= link_to "Perfil", profile_profile_path%>
+    <% end %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    
+    
+    <%= yield %>
+  </body>
+  <section class="hero">
+  <div class="hero-body">
+    <div class="container">
+     <div class="columns">
+     <div class="column.is-half.is-offset-one-quarter">
+     
+    </div>
+  </div>
+</section>
+
+
+
+<p>holi</p>
+</html>

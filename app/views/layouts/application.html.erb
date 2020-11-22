@@ -1,24 +1,98 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DCCarrete</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= link_to "Home", root_path%>
-    <%= link_to "Sign up", new_user_registration_path%>
-    <%= link_to "Sign in", new_user_session_path%>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
     
-    <% if user_signed_in? %>
     
-    <%= link_to "config", settings_path%>
-    <%= link_to "Carretes", carretes_index_url%>
-    <%= link_to "Servicios", servicio_index_url%>
-    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-    <%= link_to "Perfil", profile_profile_path%>
-    <% end %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="http://localhost:3000/">
+      <h1 class= "title-is-3"> DCCarrete <h1>
+    </a>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+       <%= link_to "Home", root_path, class: "navbar-item"%>
+
+       <% if user_signed_in? %>
+      <%= link_to "Perfil", profile_profile_path, class: "navbar-item"%>
+      <%= link_to "Carretes", carretes_index_url, class: "navbar-item"%>
+      <%= link_to "Servicios", servicio_index_url, class: "navbar-item"%>
+      <% end %>
+
+
+
+       
+      </div>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+      <% if user_signed_in? %>
+      <div class="buttons">
+      <% if current_user.role_id == 2 %>
+        <%= link_to "Settings", settings_path, class: "button is-primary" %>
+        <% end %>
+        <%= link_to "Sign out", destroy_user_session_path, :method => :delete, class: "button is-light" %>
+        <div class="dropdown is-right">
+            <div class="dropdown-trigger">
+                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu2">
+                <span>Notificaciones</span>
+                <span class="icon is-small">
+                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+                </button>
+            </div>
+          <div class="dropdown-menu" id="dropdown-menu2" role="menu">
+            <div class="dropdown-content">
+            <%if current_user%>
+            
+                <% notificaciones = Notification.where(user_id: current_user.id ) %>
+                <% if notificaciones%>
+                <% notificaciones.each do |element|  %>
+                    <%if !element.is_checked%>
+                    <div class="dropdown-item">
+                        <p> <%= element.n_text %> </p>
+                        <% element.is_checked = true %>
+                        <% element.save%>
+                    </div>
+                    <hr class="dropdown-divider">
+                    <%end%>
+                <%end%>
+                <%else%>
+                <div class="dropdown-item">
+                        <p> No tienes notificaciones </p>
+                </div>
+                <%end%>
+            <%end%>
+            </div>
+        </div>
+      </div>
+      
+      <% else %>
+        <div class="buttons">
+            <%= link_to "Sign up", new_user_registration_path, class: "button is-primary"%>
+          <%= link_to "Sign in", new_user_session_path, class: "button is-light" %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>
 
   <body>
     <p class="notice"><%= notice %></p>
@@ -27,4 +101,15 @@
     
     <%= yield %>
   </body>
+  <script type="text/javascript">
+
+    var dropdown = document.querySelector('.dropdown');
+    dropdown.addEventListener('click', function(event) {
+      event.stopPropagation();
+      dropdown.classList.toggle('is-active');
+    });
+
+  </script>
+
 </html>
+

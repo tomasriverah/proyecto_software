@@ -1,22 +1,67 @@
-<h1>Crea tu Carrete</h1>
 
-<% if @carrete.errors.any? %>
- <div>
- 	Se encontraron errores:
- 	<ul>
- 		<% @carrete.errors.full_messages.each do |error_message| %>
- 		<li><%= error_message %></li>
- 		<% end %>
- 	</ul>
- </div>
-<% end %>
 
-<%= form_with model: @carrete, :url => { :action => :create }, local: true do |f| %>
- <p><%= f.label :title, 'Titulo: ' %><%= f.text_field :title %></p>
- <p><%= f.label :body, 'Descripción: ' %><%= f.text_field :body %></p>
- <p><%= f.label :max_price, 'Precio de ingreso máximo: ' %><%= f.text_field :max_price %></p>
- <p><%= f.label :min_price, 'Precio de ingreso minimo: ' %><%= f.text_field :min_price %></p>
- <%= f.submit "Crear Carrete" %>
-<% end %>
 
-<%= link_to 'Back', :action => :index %>
+
+<div class="hero is-fullheight is-light is-bold">
+<br>
+	<div class='columns'>
+
+		<div class='column is-one-quarter'>
+		</div>
+
+		<div class='column is-half'>
+			<div class="card">
+				<div class="card-content">
+					<h1 class= "title has-text-centered">Crea tu Carrete</h1>
+					<% if @carrete.errors.any? %>
+					<div>
+						Se encontraron errores:
+						<ul>
+							<% @carrete.errors.full_messages.each do |error_message| %>
+							<li><%= error_message %></li>
+							<% end %>
+						</ul>
+					</div>
+					<% end %>
+					<%= form_with model: @carrete, :url => { :action => :create }, local: true do |f| %>
+					<div class='columns'>
+            		<div class='column'>
+					<p>
+					<%= f.label :title, 'Titulo: ' %>
+					<br>
+					<%= f.text_field :title, class: 'input is-info' %>
+					</p>
+					<p>
+					<%= f.label :body, 'Descripción: ' %>
+					<br>
+					<%= f.text_area :body, class: "textarea is-info", rows: 10 %>
+					</p>
+					<p>
+					<%= f.label :fecha, 'Fecha del Carrete: ' %>
+					<br>
+					<%= f.date_field :fecha, class: 'input is-info' %>
+					</p>
+					<%= f.label :Comuna %><br />
+					<div class = "select is-info">
+						<%= f.select :comuna_id, Comuna.all.collect { |p| [ p.nombre, p.id ] } %>
+					</div>
+					<p><%= f.label :direccion, 'Dirección (calle): ' %><br><%= f.text_field :direccion, class: 'input is-info' %></p>
+					<p><%= f.label :capacidad_maxima, 'Capacidad Máxima de asistentes: ' %><br><%= f.text_field :capacidad_maxima, class: 'input is-info' %></p>
+					<p><%= f.label :max_price, 'Precio máximo de ingreso: ' %><br><%= f.text_field :max_price, class: 'input is-info' %></p>
+					<p><%= f.label :min_price, 'Precio mínimo de ingreso: ' %><br><%= f.text_field :min_price, class: 'input is-info' %></p>
+					<footer class="card-footer">
+              		<div class="card-footer-item">
+					<%= f.submit "Crear Carrete", class:'button is-primary' %>
+					</div>
+					<div class="card-footer-item">
+					<%= link_to "Cancelar", carretes_index_url, class: "button is-link" %>
+					<br>
+					</div>
+              		</footer> 
+					</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>	
+</div>

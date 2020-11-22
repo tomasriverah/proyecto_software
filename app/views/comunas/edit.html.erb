@@ -1,3 +1,9 @@
+<%if current_user.role_id!=2%>
+<script type='text/javascript'>
+    window.location.href="/";
+    window.alert("No tienes permisos");
+</script>
+<%end%>
 <h1><%=@comuna.nombre%></h1>
 
 <%= form_with(model: @comuna, local: true) do |form| %>

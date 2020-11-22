@@ -1,11 +1,36 @@
-<h1>Nueva comuna</h1>
+
+<%if current_user.role_id!=2%>
+<script type='text/javascript'>
+    window.location.href="/";
+    window.alert("No tienes permisos");
+</script>
+<%end%>
+<div class="hero is-fullheight is-light is-bold">
+
+    <div class="columns is-centered">
+        <div class='column is-one-fifth'>
+            <div class='card'>
+                <div class='card-content'>
+
+<h1 class= "title has-text-centered">Nueva comuna</h1>
 
 
 
 <%= form_with model: @comuna, :url => { :action => :create } do |f| %>
- <p><%= f.label :nombre, 'Nombre: ' %>
- <%= f.text_field :nombre %></p>
-  <%= f.submit "Agregar" %>
+ <p><%= f.label :nombre, 'Nombre: '%>
+ <%= f.text_field :nombre, class: 'input is-info' %></p>
+ <footer class="card-footer">
+              
+              <div class="card-footer-item">
+              <%= f.submit "Agregar", class:'button is-success' %>
+              </div>
+             
+</footer>
+  
  <% end %>
 
-
+</div>
+            </div>
+        </div>
+    </div>
+</div>

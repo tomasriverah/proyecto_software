@@ -1,8 +1,8 @@
 Metrics/LineLength:
-  Max: 160
+  Max: 130
 
 Metrics/BlockLength:
-  Enabled: False
+  Max: 140
 
 Layout/IndentationWidth:
   Description: 'Use 2 spaces for indentation.'

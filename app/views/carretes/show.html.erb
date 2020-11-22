@@ -1,87 +1,235 @@
-<p>
-  <strong>Titulo: </strong>
-  <%= @carrete.title %>
-</p>
+<div class="hero is-fullheight is-light is-bold">
+ <br>
+  <div class="columns ">
+    <div class="column">
+      <div class="columns ">
+        <div class="column is-one-quarter">
+        </div>
+        <div class="column is-half">
+          <div class="card">
+            <div class="card-content">
+                <p class="card-header-title">
+                  <h1 class= "title has-text-centered"> <%= @carrete.title  %><h1>
+                </p>
+                <div class="columns">
+                  <div class="column">
+                    <p>
+                      <strong>Descripción: </strong>
+                      <%= @carrete.body %>
+                    </p>
 
-<p>
-  <strong>Autor: </strong>
-  <%= @carrete.user.name %>
-</p>
+                    <p>
+                      <strong>Precio máximo de ingreso: <%= @carrete.max_price %></strong>
+                    </p>
 
-<p>
-  <strong>Comuna(s): </strong>
-  <%= Comuna.find(@carrete.user.comunas_id).nombre%>
-</p>
+                    <p>
+                      <strong>Precio minimo de ingreso: <%= @carrete.min_price %></strong>
+                    </p>
+                    <p>
+                      <strong>Capacidad Máxima: <%= @carrete.capacidad_maxima %></strong>
+                    </p>
+                    </span>
+                  </div>
+                    
+                  <div class="column">
+                    <span class = "has-text-right">
+                    <p>
+                      <strong>Autor: </strong>
+                      <%= @carrete.user.name %>
+                    </p>
 
-<p>
-  <strong>Descripción: </strong>
-  <%= @carrete.body %>
-</p>
+                    <p>
+                      <strong>Fecha del evento: <%= @carrete.fecha %></strong>
+                    </p>
 
-<p>
-  <strong>Precio máximo de ingreso: <%= @carrete.max_price %></strong>
-</p>
+                    <p>
+                      <strong>Comuna(s): </strong>
+                      <%= Comuna.find(@carrete.comuna_id).nombre%>
+                    </p>
+                    
+                  </div>
+                  <div class="column is-one-quarter">
+                    <%= link_to "Volver", carretes_index_url, class: "button is-primary is-fullwidth" %>
+                    <br>
+              	   <%if @carrete.user == current_user%>
+                    <%= link_to 'Modificar', carretes_edit_url(id: @carrete.id), class:"button is-link is-fullwidth"%>
+                    <br>
+                    <%= link_to 'Eliminar', { :action => :destroy, :id => @carrete.id }, 
+                    :method => :delete, :data => { :confirm => 'Are you sure?' } , 
+                    class: "button is-danger is-fullwidth"%>
+                   <%end%>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="columns">
+          <div class="column is-one-quarter">
+          </div>
+          <div class="column is-one-quarter">
+            <div class="card">
+              <div class="card-content">
+                <h2 class="title is-4 has-text-centered">Postular</h2>
+        
+                <%= form_for(@postulacion, {:controller => "postulacions", :action => "postular", :method => "post"}) do |f| %>
+                    <p>
+                    <%= f.hidden_field :id, :value => @postulacion.id %>
+                    <%= f.hidden_field :carrete_id, :value => @carrete.id %>
+                    <%= f.hidden_field :user_id, :value => current_user.id %>       
+                    <%= f.label "Ingrese monto", class: "is-size-5" %><br />
+                    <%= text_field_tag :monto, nil, class: "input" %>  
+                    <br>
+                    <br>
+                    <p>
+                    <% if @postulacion.is_open == 0%>
+                      <button class="button is-danger is-fullwidth" title="Disabled button" disabled>Postulaciones Cerradas</button>
+                    <% else%>
+                      <%= f.submit "Postular", class: "button is-success is-fullwidth" %>
+                      </p>
+                    <% end%>
+                <% end %>
+              </div>
+            </div>
+            <br>
+            <div class="card">
+              <div class="card-content">
+            <p class="card-header-title">
+                <h1 class= "title has-text-centered"> Servicios contratados<h1>
+            </p>
+                <ul>
+                <%@carrete.servicios.each do |servicio|%>
+                <li><%=link_to servicio.title+' por '+servicio.user.name, servicio_show_url(id: servicio.id), class: "button is-ghost is-fullwidth"%></li>
+                <%end%>
+                </ol>
+                </p>
+            </div>
+          </div>
+          </div>
+          <div class="column is-one-quarter">
+          <%if @carrete.user == current_user%>
+            <div class="card">
+              <div class="card-content">
+                <p class="card-header-title">
+                    <h1 class= "title has-text-centered"> Info Secreta<h1>
+                </p>
+                <p>
+                  <h2 class= "subtitle has-text-centered"><strong>Postulantes: <%= @postulacion.postulaciones.count %></strong></h2>
+                </p>
 
-<p>
-  <strong>Precio minimo de ingreso: <%= @carrete.min_price %></strong>
-</p>
+                <h2 class= "subtitle has-text-centered"> <strong>Monto acumulado fiesta <strong></h2>
+                <h2 class= "subtitle has-text-centered"><%="$" + @monto.to_s %></h2>
+                <% if @postulacion.is_open == 0%>
+                  <button class="button is-danger is-fullwidth" title="Disabled button" disabled>Postulaciones Cerradas</button>
+                <% else%>
+                  <%= form_with(url: "/postulacions/close_postulacion", method: "get") do |f| %>
+                    <p>
+                    <%= f.hidden_field :id, :value => @postulacion.id %>
+                    <%= f.hidden_field :carrete_id, :value => @carrete.id %>
+                    </p>
+                    <p>
+                    <%= f.submit "Cerrar Postulación", class: "button is-danger is-fullwidth" %>
+                    </p>
+                  <% end %>
+                <% end %>
+                <br>
+                <%if !@carrete.done %>
+                <p>
+                <%= link_to 'Contratar servicio', carretes_services_url(id: @carrete.id), class: "button is-success is-fullwidth"%>
+                </p>
+                <br>
+                  <%= form_with(url: "/carretes/mark_done", method: "get") do |f| %>
+                    <p>
+                    <%= f.hidden_field :id, :value => @carrete.id %>
+                    <%= f.submit "Marcar realizado", class: "button is-success is-fullwidth"%>
+                    </p>
+                  <% end %>
+                <%else%> 
+                  <button class="button is-danger is-fullwidth" title="Disabled button" disabled>Carrete Realizado</button>
+                <% end %>
+              </div>
+            </div>
+          <%end%>
+          </div>
+          
+      </div>
 
-<% if @carrete.user_id == current_user.id %>
-<h2>Monto acumulado fiesta</h2>
-    <%= @monto %>
-<% end %>
+      <div class="columns">
+        <div class="column is-one-quarter">
+        </div>
+        <div class="column is-half">
+          <% if @carrete.done%>
+            <div class="card">
+              <div class="card-content">
+                <h2 class="title is-4 has-text-centered">Comentarios</h2>
+                <% @carrete.comentarios.each do |comment| %>
+                <div class = "container ">
+                <article class="media">
+                  <figure class="media-left">
+                    <p class="image is-64x64">
+                      <img src="https://i.pinimg.com/originals/d1/ad/13/d1ad13605acd060cbcc4b334e2119883.png">
+                    </p>
+                  </figure>
+                  <div class="media-content">
+                    <div class="content">
+                      <p>
+                        <%= comment.user.name %>
+                        <br>
+                        <%= comment.body %>
+                      </p>
+                    </div>
+                    <nav class="level is-mobile">
+                      <div class="level-left">
+                        <a class="level-item">
+                          <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                        </a>
+                        <a class="level-item">
+                          <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                        </a>
+                        <a class="level-item">
+                          <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                        </a>
+                      </div>
+                    </nav>
+                  </div>
+                  <div class="media-right">
+                    <button class="delete"></button>
+                  </div>
+                </article>
+                <% end %>
+                <%= form_for([@carrete, @carrete.comentarios.build]) do |f| %>
+                <article class="media">
+                  <figure class="media-left">
+                    <p class="image is-64x64">
+                      <img src="https://i.pinimg.com/originals/d1/ad/13/d1ad13605acd060cbcc4b334e2119883.png">
+                    </p>
+                  </figure>
+                  <div class="media-content">
+                    <div class="field">
+                      <p class="control">
+                        <%= f.text_area :body, class: "textarea", placeholder: "Escribe tu comentario..." %>
+                      </p>
+                    </div>
+                    <nav class="level">
+                      <div class="level-left">
+                        <div class="level-item">
+                          <a >
+                          <%= f.submit 'Enviar', class: "button is-info" %>
+                          </a>
+                        </div>
+                      </div>
+                    </nav>
+                  </div>
+                </article>
+                <% end %>
+              </div>
+            </div> 
+          <%end%> 
+        </div>       
+      </div>
+    </div>  
+  </div>
+</div>
+  
 
 
-<h2>Postular:</h2>
- 
-<%= form_for(@postulacion, {:controller => "postulacions", :action => "postular", :method => "post"}) do |f| %>
-  <p>
-    <%= f.hidden_field :id, :value => @postulacion.id %>
-    <%= f.hidden_field :carrete_id, :value => @carrete.id %>
-    <%= f.hidden_field :user_id, :value => current_user.id %>
-    <%= f.label :monto %><br />
-    <%= text_field_tag :monto %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
-
-
-
-
-<h2>Comentarios</h2>
-<% @carrete.comentarios.each do |comment| %>
-  <p>
-    Autor:
-    <%= comment.user.name %>
-  </p>
-
-  <p>
-    Comentario:
-    <%= comment.body %>
-  </p>
-
-  <p>
-  <%= link_to 'Eliminar Comentario', [comment.carrete, comment],
-               :method => :delete,
-               :data => { :confirm => '¿Estás seguro?' } %>
-  </p>
-<% end %>
-
-<h2>Escribe un comentario:</h2>
-<%= form_for([@carrete, @carrete.comentarios.build]) do |f| %>
-  <p>
-    <%= f.label :Contenido %><br />
-    <%= f.text_area :body %>
-  </p>
-  <p>
-    <%= f.submit 'Crear comentario'%>
-  </p>
-<% end %>
-
-<%= link_to 'Back', :action => :index %>
-
-<% if @carrete.user == current_user %>
-| <%= link_to 'Edit', :action => :edit, :id => @carrete.id %>
-<% end %>

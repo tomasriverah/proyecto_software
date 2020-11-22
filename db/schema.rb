@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_28_220826) do
+ActiveRecord::Schema.define(version: 2020_11_20_135843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "carrete_servicios", force: :cascade do |t|
+    t.bigint "carrete_id"
+    t.bigint "servicio_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["carrete_id"], name: "index_carrete_servicios_on_carrete_id"
+    t.index ["servicio_id"], name: "index_carrete_servicios_on_servicio_id"
+  end
 
   create_table "carretes", force: :cascade do |t|
     t.string "title"
@@ -23,7 +32,30 @@ ActiveRecord::Schema.define(version: 2020_10_28_220826) do
     t.integer "min_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "direccion"
+    t.bigint "comuna_id"
+    t.integer "capacidad_maxima"
+    t.date "fecha"
+    t.boolean "done"
+    t.index ["comuna_id"], name: "index_carretes_on_comuna_id"
     t.index ["user_id"], name: "index_carretes_on_user_id"
+  end
+
+  create_table "cars", force: :cascade do |t|
+    t.string "brad"
+    t.string "model"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cobertura_servicios", force: :cascade do |t|
+    t.bigint "comuna_id"
+    t.bigint "servicio_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comuna_id"], name: "index_cobertura_servicios_on_comuna_id"
+    t.index ["servicio_id"], name: "index_cobertura_servicios_on_servicio_id"
   end
 
   create_table "comentarios", force: :cascade do |t|
@@ -45,6 +77,14 @@ ActiveRecord::Schema.define(version: 2020_10_28_220826) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer "user_id"
+    t.text "n_text"
+    t.boolean "is_checked"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "author"
     t.string "title"
@@ -59,6 +99,7 @@ ActiveRecord::Schema.define(version: 2020_10_28_220826) do
     t.text "postulaciones"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "is_open"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -85,7 +126,15 @@ ActiveRecord::Schema.define(version: 2020_10_28_220826) do
     t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status"
     t.index ["user_id"], name: "index_servicios_on_user_id"
+  end
+
+  create_table "user_descripcions", force: :cascade do |t|
+    t.text "descripcion"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -105,7 +154,12 @@ ActiveRecord::Schema.define(version: 2020_10_28_220826) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  add_foreign_key "carrete_servicios", "carretes"
+  add_foreign_key "carrete_servicios", "servicios"
+  add_foreign_key "carretes", "comunas"
   add_foreign_key "carretes", "users"
+  add_foreign_key "cobertura_servicios", "comunas"
+  add_foreign_key "cobertura_servicios", "servicios"
   add_foreign_key "comentarios", "carretes"
   add_foreign_key "comentarios", "posts"
   add_foreign_key "comentarios", "users"
