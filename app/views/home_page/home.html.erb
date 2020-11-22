@@ -28,7 +28,7 @@ body{
       </header>
         <div class="card-content">
         
-        <% @carretes = Carrete.all.sort_by &:fecha%>
+        <% @carretes = Carrete.where(comuna_id: current_user.comunas_id).sort_by &:fecha%>
         <% @i = 0%>
         <% @carretes.each do |carrete|%>
         <% @i += 1%>

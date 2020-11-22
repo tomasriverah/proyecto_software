@@ -69,14 +69,9 @@
                   <div class="media-content">
                     <div class="content">
                       <p>
-                        <%= comment.user.name %>
+                        <b><%= comment.user.name %></b>
                         <br>
                         <%= comment.body %>
-                        <% if comment.user == current_user || @servicio.user == current_user%>
-                        <%= link_to 'Eliminar Comentario', [comment.servicio, comment],
-                          :method => :delete,
-                        :data => { :confirm => '¿Estás seguro?' } %>
-                        <%end%>
                       </p>
                     </div>
                     <nav class="level is-mobile">
@@ -94,7 +89,11 @@
                     </nav>
                   </div>
                   <div class="media-right">
-                    <button class="delete"></button>
+                    <% if comment.user == current_user || @servicio.user == current_user%>
+                        <%= link_to '', [comment.servicio, comment],
+                          :method => :delete,
+                        :data => { :confirm => '¿Estás seguro?' }, class: 'delete' %>
+                    <%end%>
                   </div>
                 </article>
                 <% end %>

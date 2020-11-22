@@ -7,26 +7,21 @@
 <%end%>
 <div class="hero is-fullheight is-light is-bold">
     <div class="columns is-centered">
-        <div class='column is-four-fifths'>
+        <div class='column is-three-fifths'>
             <div class='card'>
                 <div class='card-content'>
                     <h1 class= "title has-text-centered">Settings</h1>
                     <div class=columns>
-                        <div class="column is-one-quarter">
+                        <div class="column is-one-third">
                         <ul>
                             <li><%=link_to "Modificar Comunas", comunas_index_path, class: "button is-link is-fullwidth"%></li>
-                            <br>
-                            <li><%=link_to "", settings_path, class: "button is-link is-fullwidth"%></li>
                         </ul>
                         </div>
-                        <div class="column is-one-quarter">
+                        <div class="column is-one-third">
                             <%=link_to "Servicios por revisar", servicio_admin_index_url, class: "button is-link is-fullwidth"%>
                         </div>
-                        <div class="column is-one-quarter">
+                        <div class="column is-one-third">
                             <%=link_to "Agregar administrador", admin_new_admin_path, class: "button is-link is-fullwidth"%>
-                        </div>
-                        <div class="column is-one-quarter">
-                            <%=link_to "", settings_path, class: "button is-link is-fullwidth"%>
                         </div>
                     </div>
                 </div>
