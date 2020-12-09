@@ -25,18 +25,18 @@ class PostulacionsController < ApplicationController
 
   def send_notificacion(postulacion)
     @carrete = Carrete.find(postulacion.carrete_id)
-    postulacions_sorted = @carrete.postulacion.postulaciones { |uid, monto| -monto }
+    postulacions_sorted = @carrete.postulacion.postulaciones { |_uid, monto| -monto }
     texto = 'Felicitaciones tu postulación ha sido aceptada, estás invitado a ' + @carrete.title + '.'
     i = 0
     postulacions_sorted.each do |uid, _monto|
       i += 1
-      if i > @carrete.capacidad_maxima
-        return
-      end
+      return if i > @carrete.capacidad_maxima
+
       notificiacion = Notification.new
       notificiacion.user_id = uid
       notificiacion.n_text = texto
       notificiacion.is_checked = false
+      notificiacion.codigo = rand(36**8).to_s(36)
       notificiacion.save
     end
   end

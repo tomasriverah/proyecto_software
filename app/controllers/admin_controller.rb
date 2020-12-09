@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class AdminController < ApplicationController
-  before_action :authenticate_user!, only: %i[:new_admin]
+  before_action :authenticate_user!, only: %i[new_admin]
   def new_admin
     @users = User.where.not(role_id: '2')
   end

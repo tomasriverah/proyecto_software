@@ -2,7 +2,7 @@
 
 class ProfileController < ApplicationController
   before_action :authenticate_user!, only: [:profile]
-  
+
   def profile
     @users = User.all
     @carretes = Carrete.where(user_id: current_user.id)
@@ -34,9 +34,7 @@ class ProfileController < ApplicationController
     end
   end
 
-
-  def recordatorio
-  end
+  def recordatorio; end
 
   def destroy
     ### https://stackoverflow.com/questions/21192949/deleting-users-in-devise-generated-model referencia

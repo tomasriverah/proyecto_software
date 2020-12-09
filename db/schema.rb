@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_20_135843) do
+ActiveRecord::Schema.define(version: 2020_12_07_154401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,14 +39,6 @@ ActiveRecord::Schema.define(version: 2020_11_20_135843) do
     t.boolean "done"
     t.index ["comuna_id"], name: "index_carretes_on_comuna_id"
     t.index ["user_id"], name: "index_carretes_on_user_id"
-  end
-
-  create_table "cars", force: :cascade do |t|
-    t.string "brad"
-    t.string "model"
-    t.integer "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "cobertura_servicios", force: :cascade do |t|
@@ -83,6 +75,7 @@ ActiveRecord::Schema.define(version: 2020_11_20_135843) do
     t.boolean "is_checked"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "codigo"
   end
 
   create_table "posts", force: :cascade do |t|

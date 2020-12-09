@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ServicioController < ApplicationController
-  before_action :authenticate_user!, only: %i[:index :admin_index :new :show :edit]
+  before_action :authenticate_user!, only: %i[index admin_index new show edit]
   def index
     @servicio = Servicio.where(status: 'aprobado')
   end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ComunasController < ApplicationController
-  before_action :authenticate_user!, only: %i[:index :new :edit]
+  before_action :authenticate_user!, only: %i[index new edit]
   def create
     @comuna = Comuna.new(comuna_params)
 

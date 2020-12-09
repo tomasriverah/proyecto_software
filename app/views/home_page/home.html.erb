@@ -66,6 +66,42 @@ body{
         </div>
     </div>
     <div class="colum is-one-quarter">
+      <%if current_user%>
+      <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          Tus códigos
+        </p>
+        <a href="#" class="card-header-icon" aria-label="more options">
+          <span class="icon">
+            <i class="far fa-calendar-plus" aria-hidden="true"></i>
+          </span>
+        </a>
+      </header>
+        <div class="card-content">
+        
+        <% @notificaciones = Notification.where(user_id: current_user.id)%>
+        <% @i = 0%>
+        <% @notificaciones.each do |notificacion|%>
+        <%if notificacion.codigo%>
+        <% @i += 1%>
+        <%if @i <= 3%>
+        <div class="dropdown-item">
+        <span class="tag is-light is-large">
+        <% nombre = notificacion.n_text.split(' a ')[1] %>
+        <%= nombre %>
+        </span>
+        <br>
+        <%= 'Codigo: ' + notificacion.codigo%>
+        </div>
+        <hr class="dropdown-divider">
+        <%end%>
+        <%end%>
+        <%end%>
+        </div>
+        
+      </div>
+    <%end%>
     </div>
   </div>
 

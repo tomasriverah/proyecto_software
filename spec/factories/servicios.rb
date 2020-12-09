@@ -2,9 +2,9 @@
 
 FactoryBot.define do
   factory :servicio do
-    title { 'MyString' }
-    user { nil }
-    body { 'MyText' }
+    title { Faker::Name }
+    user { Faker::Name }
+    body { Faker::Twitter.text }
     price { 1 }
   end
 end

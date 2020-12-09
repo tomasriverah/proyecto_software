@@ -48,6 +48,17 @@ rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
 end
+
+module ControllerMacros
+  def login_user
+    before(:each) do
+      @request.env['devise.mapping'] = Devise.mappings[:user]
+      user = FactoryBot.create(:user)
+      sign_in user
+    end
+  end
+end
+
 RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
@@ -56,7 +67,9 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::ControllerHelpers, type: :view
   config.include Warden::Test::Helpers
+  config.extend ControllerMacros, type: :controller
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.

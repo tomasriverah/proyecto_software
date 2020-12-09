@@ -28,7 +28,7 @@ label {
 <%= link_to 'Crear Carrete', carretes_new_url, class: "button is-primary"%>
 </div>
 
-<%= form_with url: carretes_index_url,method: "get" do |f| %>
+<%= form_with :url => { :action => :index}, method: "get" ,local: true do |f| %>
                     <div class="columns is-centered">
                     <div class ="column is-one-third" >
                     <div class="card">   

@@ -21,14 +21,19 @@ class CarretesController < ApplicationController
   end
 
   def index
-    if (params[:filter])
-      @carrete = self.filter(params)
-    else
-      @carrete = Carrete.all
-    end
+    @carrete = if params[:filter]
+                  if (params[:precio_min] != "")
+                    Carrete.where('comuna_id=' + params[:comunas_id] + ' AND ' +  'min_price >' + params[:precio_min])
+                  else
+                    Carrete.where(comuna_id: params[:comunas_id] )
+                  end
+               else
+                 Carrete.all
+               end
     @carrete
   end
 
+  
   def show
     @carrete = Carrete.find(params[:id])
     id_carrete = @carrete.id.dup
@@ -45,44 +50,21 @@ class CarretesController < ApplicationController
     @servicio = @comuna.servicios
   end
 
-  def new_service
-    @carrete = Carrete.find(params[:id])
-
-    redirect_to carretes_show(id: @carrete.id)
-  end
-
   def edit
     @carrete = Carrete.find(params[:id])
   end
 
   def update
     @carrete = Carrete.find(params[:id])
-    # @servicio = Servicio.find(params[:carrete][:servicio])
-    # @carrete.servicios << @servicio
+    if params[:carrete][:servicio]
+      @carrete.servicios << Servicio.find(params[:carrete][:servicio])
+    end
     if @carrete.update_attributes(carrete_params)
       redirect_to carretes_index_path, confirm: 'Carrete editado con exito'
     else
       render 'edit'
     end
   end
-
-  def filter(params)
-    
-    if (params[:precio_min] != "" && params[:comunas_id] != "")
-      @filtrado = Carrete.where("min_price <= ? AND comuna_id = ?", params[:min_price], params[:comunas_id].to_i)
-      
-    elsif (params[:comunas_id] != "")
-      @filtrado = Carrete.where("comuna_id = ?", params[:comunas_id].to_i)
-      
-    else
-      @filtrado = Carrete.where("min_price <= ?", params[:min_price])
-    end
-    
-    return @filtrado
-  end
-
-
-
 
   def mark_done
     @carrete = Carrete.find(params[:id])

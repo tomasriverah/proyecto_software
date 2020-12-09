@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   post 'admin/new_admin', to: 'admin#make_admin'
   get 'settings/display', to: 'settings#display', as: 'settings'
   get 'carretes/services'
-  delete 'servicio/destroy_from_profile', to:'servicio#destroy_from_profile'
-  delete 'carretes/destroy_from_profile', to:'carretes#destroy_from_profile'
+  delete 'servicio/destroy_from_profile', to: 'servicio#destroy_from_profile'
+  delete 'carretes/destroy_from_profile', to: 'carretes#destroy_from_profile'
   get 'settings/display'
   get 'settings/index'
   get 'settings/new'
@@ -58,8 +58,6 @@ Rails.application.routes.draw do
   resources :servicio do
     resources :servicecomments
   end
-
- 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
