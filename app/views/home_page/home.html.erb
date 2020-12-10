@@ -12,39 +12,39 @@ body{
 <br>
   <div class="columns ">
     <div class="column is-one-quarter">
-    <%if current_user%>
-      <div class="card">
-        <header class="card-header">
-          <p class="card-header-title">
-            Próximos Carretes
-          </p>
-          <a href="#" class="card-header-icon" aria-label="more options">
-            <span class="icon">
-              <i class="far fa-calendar-plus" aria-hidden="true"></i>
-            </span>
-          </a>
-        </header>
-          <div class="card-content">
-          
-            <% @carretes = Carrete.where(comuna_id: current_user.comunas_id).sort_by &:fecha%>
-            <% @i = 0%>
-            <% @carretes.each do |carrete|%>
-            <% @i += 1%>
-            <%if @i <= 3%>
-            <div class="dropdown-item">
-              <span class="tag is-light is-large">
-              <%=  link_to carrete.title, "carretes/show?id=" + carrete.id.to_s %>
+      <%if current_user%>
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              Próximos Carretes
+            </p>
+            <a href="#" class="card-header-icon" aria-label="more options">
+              <span class="icon">
+                <i class="far fa-calendar-plus" aria-hidden="true"></i>
               </span>
-              <br>
-              <%='Fecha: ' + carrete.fecha.strftime('%d-%m-%Y').to_s%>
+            </a>
+          </header>
+            <div class="card-content">
+            
+              <% @carretes = Carrete.where(comuna_id: current_user.comunas_id).sort_by &:fecha%>
+              <% @i = 0%>
+              <% @carretes.each do |carrete|%>
+              <% @i += 1%>
+              <%if @i <= 3%>
+              <div class="dropdown-item">
+                <span class="tag is-light is-large">
+                <%=  link_to carrete.title, "carretes/show?id=" + carrete.id.to_s %>
+                </span>
+                <br>
+                <%='Fecha: ' + carrete.fecha.strftime('%d-%m-%Y').to_s%>
+              </div>
+              <hr class="dropdown-divider">
+              <%end%>
+              <%end%>
             </div>
-            <hr class="dropdown-divider">
-            <%end%>
-            <%end%>
-          </div>
-          
-      </div>
-    <%end%>
+            
+        </div>
+      <%end%>
     </div>
     <div class="column is-half">
         <div class="card">
@@ -95,14 +95,6 @@ body{
         <%end%>
         <%end%>
         <%end%>
-        <%else%>
-          <h1 class="subtitle is-2"><%=@active_users%> Usuarios Activos </h1>
-          <h1 class="subtitle is-2"><%=Carrete.count%> Carretes online </h1> 
-          <h1 class="subtitle is-4">
-          <%= link_to 'Inicia sesión', new_user_session_path%> o
-          <%= link_to 'regístrate', new_user_registration_path%>
-          </h1>
-        <%end %>
       </div>
     </div>
   </div>
