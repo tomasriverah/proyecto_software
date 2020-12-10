@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <style>
+  .body{
+    margin-left: 20px; 
+    margin-right: 20px; 
+    margin-top: 20px; 
+    margin-bottom: 20px; 
+  }
+  </style>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
@@ -26,17 +34,11 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-       <%= link_to "Home", root_path, class: "navbar-item"%>
-
        <% if user_signed_in? %>
       <%= link_to "Perfil", profile_profile_path, class: "navbar-item"%>
       <%= link_to "Carretes", carretes_index_url, class: "navbar-item"%>
       <%= link_to "Servicios", servicio_index_url, class: "navbar-item"%>
       <% end %>
-
-
-
-       
       </div>
     </div>
 
@@ -60,13 +62,12 @@
           <div class="dropdown-menu" id="dropdown-menu2" role="menu">
             <div class="dropdown-content">
             <%if current_user%>
-            
                 <% notificaciones = Notification.where(user_id: current_user.id ) %>
                 <% if notificaciones%>
                 <% notificaciones.each do |element|  %>
                     <%if !element.is_checked%>
                     <div class="dropdown-item">
-                        <p> <%= element.n_text %> </p>
+                        <p> <%= link_to element.n_text, profile_profile_path %> </p>
                         <% element.is_checked = true %>
                         <% element.save%>
                     </div>
@@ -95,8 +96,11 @@
 </nav>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% flash.each do |type, msg| %>
+      <div class="notification is-info">
+        <%= msg %>
+      </div>
+    <% end %>
     
     
     <%= yield %>
@@ -108,7 +112,6 @@
       event.stopPropagation();
       dropdown.classList.toggle('is-active');
     });
-
   </script>
 
 </html>

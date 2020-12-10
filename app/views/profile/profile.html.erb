@@ -1,29 +1,30 @@
-<div class='hero is-fullheight is-light is-bold'>
-<br>
-<div class="level is-fluid">
-	<div class="level-item">
-		<div class="columns is-centered">
-  			<div class="column is-8">
-  				<p class= "">
-				¿ Deseas ser Admin ? 
-				<%= button_to "Ser administrador", user_path(current_user) ,method: :get,
-				class: "button is-primary"%>
-			</div>
+<style>
+.sticky	{
+	position: sticky;
+  top: 10px;
+}
+</style>
 
- 			<div class="column is-8">
-  				<p class= "">
-				¿ Deseas ser proveedor de Servicio ? 
-				<%= button_to "Ser proveedor de servicio", 'blabla' ,method: :get,
-	 			class: "button is-primary"%><br>
-	 		</div>
-	 	</div>
-	</div>
-</div>
-  <div class='columns is-centered'>
-    <div class='column is-four-fifths'>
+
+<div class='hero is-fullheight is-light is-bold'>
+<div class='body'>
+  <div class='columns'>
+    <div class='column is-one-fifth'>
+      <div class='card sticky'>
+        <div class='card-content'>
+          <%=link_to 'Información Personal', '#info', class:'button is-white'%>
+          <br>
+          <%=link_to 'Mis Carretes', '#carretes', class:'button is-white'%>
+          <br>
+          <%=link_to 'Mis Servicios', '#servicios', class:'button is-white'%>
+          </div>
+      </div>
+    </div>
+
+    <div class='column is-three-fifths'>
       <div class='card'>
         <div class='card-content'>
-          <div class='hero is-primary'>
+          <div class='hero is-primary' id='info'>
             <br>
             <div class='columns is-centered'>
               <div class='column is-one-fifth'>
@@ -39,15 +40,6 @@
                 </h1>
                 <h2 class="subtitle">
                   Comuna del usuario: <%= Comuna.find(current_user.comunas_id).nombre%>
-                </h2>
-                <h2 class="subtitle">
-                  <% if current_user.role_id == 1%>
-                    Rol del usuario: Normal
-                  <% elsif current_user.role_id == 2%>
-                    Rol del usuario: Administrador
-                  <% elsif current_user.role_id == 3%>
-                    Rol del usuario: Proveedor de Servicio
-                  <% end %>
                 </h2>
                 <h2 class="subtitle">
                   Creador de <strong><%= @carretes.count%></strong> Carrete(s).
@@ -70,42 +62,8 @@
             <br>
           </div>
         <br>
-        <h1 class='subtitle is-4'> Mis Carretes<h1>
-        <% @carretes.each do |carrete|%>
-          <div class='card'>
-            <div class='card-content'>
-              <div class=columns>
-                <div class='column is-three-quarters'>
-                  <div class=columns>
-                    <div class='column is-half'>
-                      <%=link_to carretes_show_url(id: carrete.id) do%>
-                      <h1 class='subtitle is-5'><%=carrete.title%></h1>
-                      <%end%>
-                      <br>
-                      <p><strong>Direccion: </strong><%=carrete.direccion%>, <%=Comuna.find(carrete.comuna_id).nombre%></p>
-                      <p><strong>Fecha: </strong><%=carrete.fecha%></p>
-                      <p><strong>Capacidad: </strong><%=carrete.capacidad_maxima%></p>
-                      <p><strong>Fecha de creación: </strong><%=carrete.created_at.strftime("%d/%m/%Y")%></p>
-                    </div>
-                    <div class='column is-half'>
-                    <strong>Descripcion: </strong>
-                    <br>
-                    <%=carrete.body%>
-                    </div>
-                  </div>
-                </div>
-                <div class=column>
-                <%= link_to 'Modificar', carretes_edit_url(id: carrete.id), class:"button is-link is-fullwidth"%>
-                    <br>
-                    <%= link_to 'Eliminar', { :action => "destroy_from_profile", :controller => "carretes", :id => carrete.id }, 
-                    :method => :delete, :data => { :confirm => 'Are you sure?' } , 
-                    class: "button is-danger is-fullwidth"%>
-                </div>
-              </div>
-            </div>
-          </div>
-        <%end%>
-        <br>
+        
+        <section id='servicios'>
         <h1 class='subtitle is-4'> Mis Servicios<h1>
         <% @servicios.each do |servicio|%>
           <div class='card'>
@@ -144,8 +102,10 @@
             </div>
           </div>
         <%end%>
+        </section>
         </div>
       </div>
     </div>
   </div>
+</div>
 </div>

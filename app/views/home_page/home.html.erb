@@ -2,9 +2,6 @@
 body{
     background-image: url('https://media2.giphy.com/media/YPdztBLh6H2pYxn1MA/giphy.gif');
     background-size: cover;
-    
-    
-    
     height: 100vh;
     padding:20;
     margin:0;
@@ -98,12 +95,18 @@ body{
         <%end%>
         <%end%>
         <%end%>
-        </div>
-        
+        <%else%>
+          <h1 class="subtitle is-2"><%=@active_users%> Usuarios Activos </h1>
+          <h1 class="subtitle is-2"><%=Carrete.count%> Carretes online </h1> 
+          <h1 class="subtitle is-4">
+          <%= link_to 'Inicia sesión', new_user_session_path%> o
+          <%= link_to 'regístrate', new_user_registration_path%>
+          </h1>
+        <%end %>
       </div>
-    <%end%>
     </div>
   </div>
+</div>
 
 
 

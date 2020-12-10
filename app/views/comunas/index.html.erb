@@ -5,31 +5,44 @@
 </script>
 <%end%>
 <div class="hero is-fullheight is-light is-bold">
-<br>
+<div class='body'>
     <div class="columns is-centered">
         <div class='column is-one-quarter'>
         <div class=card>
-        <div class='card-content'>
+        <div class='card-content has-text-centered'>
         
             <h1 class= "title has-text-centered">Comunas</h1>
 
             <%=link_to "Agregar comuna", comunas_new_path, class: 'button is-link'%>
             <br>
+            <br>
             <ul class="comuna list">
-            <% @comuna.each do |comuna| %>
-            <li><%= comuna.nombre%><br>
-            <%= link_to 'Eliminar',
-                    { :action => :destroy, :id => comuna.id }, 
-                    :method => :delete, 
-                    :data => { :confirm => 'Are you sure?' }, class: "button is-danger"
-                        %></li>
-                        <br>
-                        <% end %>
+                <% @comuna.each do |comuna| %>
+                    <div class=content>
+                        
+                        <div class='columns'>
+                        <div class='column is-three-fifths has-text-left'>
+                            <li class='subtitle is-5'><%= comuna.nombre%>
+                            </div>
+                            <div class='column is-half'>
+                            <%= link_to 'Eliminar',
+                                    { :action => :destroy, :id => comuna.id }, 
+                                    :method => :delete, 
+                                    :data => { :confirm => 'Are you sure?' }, class: "button is-danger"
+                                        %></div>
+                                        </li>
+                                        
+                                       
+                                       
+                        </div>
+                <% end %>
             </ul>
+            
+       
         
         </div>
         </div>
-        </div>
     </div>
+</div>
 </div>
 
