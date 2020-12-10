@@ -62,7 +62,44 @@
             <br>
           </div>
         <br>
-        
+        <section id='carretes'>
+        <h1 class='subtitle is-4'> Mis Carretes<h1>
+        <% @carretes.each do |carrete|%>
+          <div class='card'>
+            <div class='card-content'>
+              <div class=columns>
+                <div class='column is-three-quarters'>
+                  <div class=columns>
+                    <div class='column is-half'>
+                      <%=link_to carretes_show_url(id: carrete.id) do%>
+                      <h1 class='subtitle is-5'><%=carrete.title%></h1>
+                      <%end%>
+                      <br>
+                      <p><strong>Direccion: </strong><%=carrete.direccion%>, <%=Comuna.find(carrete.comuna_id).nombre%></p>
+                      <p><strong>Fecha: </strong><%=carrete.fecha%></p>
+                      <p><strong>Capacidad: </strong><%=carrete.capacidad_maxima%></p>
+                      <p><strong>Fecha de creación: </strong><%=carrete.created_at.strftime("%d/%m/%Y")%></p>
+                    </div>
+                    <div class='column is-half'>
+                    <strong>Descripcion: </strong>
+                    <br>
+                    <%=carrete.body%>
+                    </div>
+                  </div>
+                </div>
+                <div class=column>
+                <%= link_to 'Modificar', carretes_edit_url(id: carrete.id), class:"button is-link is-fullwidth"%>
+                    <br>
+                    <%= link_to 'Eliminar', { :action => "destroy_from_profile", :controller => "carretes", :id => carrete.id }, 
+                    :method => :delete, :data => { :confirm => 'Are you sure?' } , 
+                    class: "button is-danger is-fullwidth"%>
+                </div>
+              </div>
+            </div>
+          </div>
+        <%end%>
+        <br>
+        </section>
         <section id='servicios'>
         <h1 class='subtitle is-4'> Mis Servicios<h1>
         <% @servicios.each do |servicio|%>
